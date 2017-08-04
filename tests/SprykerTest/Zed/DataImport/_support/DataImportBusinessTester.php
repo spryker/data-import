@@ -19,10 +19,10 @@ use Spryker\Zed\DataImport\Business\DataImportBusinessFactory;
  *
  * @SuppressWarnings(PHPMD)
  */
-class BusinessTester extends Actor
+class DataImportBusinessTester extends Actor
 {
 
-    use _generated\BusinessTesterActions;
+    use _generated\DataImportBusinessTesterActions;
 
     /**
      * @return \Spryker\Zed\DataImport\Business\DataImportBusinessFactory
