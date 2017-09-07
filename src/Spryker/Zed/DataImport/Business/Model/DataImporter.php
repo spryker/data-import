@@ -18,6 +18,7 @@ use Spryker\Zed\DataImport\Business\Model\DataReader\DataReaderInterface;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class DataImporter implements
     DataImporterBeforeImportAwareInterface,
@@ -50,6 +51,8 @@ class DataImporter implements
      * @var \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerInterface[]
      */
     protected $dataSetStepBroker = [];
+
+    const STOPWATCH_EVENT_NAME = 'import';
 
     /**
      * @param string $importType
@@ -123,6 +126,9 @@ class DataImporter implements
 
         $this->beforeImport();
 
+        $stopWatch = new Stopwatch();
+        $stopWatch->start(self::STOPWATCH_EVENT_NAME);
+
         foreach ($dataReader as $dataSet) {
             try {
                 $this->importDataSet($dataSet);
@@ -138,6 +144,10 @@ class DataImporter implements
 
             unset($dataSet);
         }
+
+        $event = $stopWatch->stop(self::STOPWATCH_EVENT_NAME);
+
+        $dataImporterReportTransfer->setImportTime($event->getDuration());
 
         $this->afterImport();
 
