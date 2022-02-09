@@ -127,11 +127,9 @@ class DataImporterPublisher implements DataImporterPublisherInterface
      */
     protected static function loadEventFacade()
     {
-        if (static::$eventFacade === null) {
+        if (!static::$eventFacade) {
             $locatorClassName = Locator::class;
-            /** @var \Generated\Zed\Ide\AutoCompletion&\Spryker\Shared\Kernel\LocatorLocatorInterface $locator */
-            $locator = $locatorClassName::getInstance();
-            static::$eventFacade = $locator->event()->facade();
+            static::$eventFacade = $locatorClassName::getInstance()->event()->facade();
         }
     }
 
