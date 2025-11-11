@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerTest\Zed\DataImport\_support\Helper;
+namespace SprykerTest\Zed\DataImport\Helper;
 
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepAfterExecuteInterface;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepBeforeExecuteInterface;

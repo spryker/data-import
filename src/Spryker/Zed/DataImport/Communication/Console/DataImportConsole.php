@@ -152,11 +152,6 @@ class DataImportConsole extends Console
     public const OPTION_CONFIG_SHORT = 'c';
 
     /**
-     * @var \Symfony\Component\Console\Input\InputInterface
-     */
-    protected $input;
-
-    /**
      * @return void
      */
     protected function configure(): void

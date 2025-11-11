@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerTest\Zed\DataImport\Model;
+namespace SprykerTest\Zed\DataImport\Business\Model;
 
 use Codeception\Test\Unit;
 use Generated\Shared\DataBuilder\DataImporterConfigurationBuilder;
@@ -19,10 +19,10 @@ use Spryker\Zed\DataImport\Business\Model\DataImporterCollectionInterface;
  * @group SprykerTest
  * @group Zed
  * @group DataImport
+ * @group Business
  * @group Model
  * @group DataImporterCollectionTest
  * Add your own group annotations below this line
- * @property \SprykerTest\Zed\DataImport\DataImportBusinessTester $tester
  */
 class DataImporterCollectionTest extends Unit
 {

@@ -8,7 +8,7 @@
 namespace SprykerTest\Zed\DataImport\Business\Model\DataSet;
 
 use Codeception\Test\Unit;
-use SprykerTest\Zed\DataImport\_support\Helper\DataImportStepBeforeAndAfter;
+use SprykerTest\Zed\DataImport\Helper\DataImportStepBeforeAndAfter;
 
 /**
  * Auto-generated group annotations
