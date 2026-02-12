@@ -36,6 +36,8 @@ class DataImporter implements
     DataImporterImportGroupAwareInterface,
     DataImporterDataSetIdentifierAwareInterface
 {
+    protected const int DEFAULT_AMOUNT_OF_ERRORS = 50;
+
     /**
      * @var string
      */
@@ -76,21 +78,23 @@ class DataImporter implements
      */
     protected $gracefulRunnerFacade;
 
+    protected ?DataImportConfig $config;
+
     /**
      * @var string|null
      */
     protected ?string $dataSetIdentifierKey = null;
 
-    /**
-     * @param string $importType
-     * @param \Spryker\Zed\DataImport\Business\Model\DataReader\DataReaderInterface $dataReader
-     * @param \Spryker\Zed\DataImport\Dependency\Facade\DataImportToGracefulRunnerInterface $gracefulRunnerFacade
-     */
-    public function __construct($importType, DataReaderInterface $dataReader, DataImportToGracefulRunnerInterface $gracefulRunnerFacade)
-    {
+    public function __construct(
+        string $importType,
+        DataReaderInterface $dataReader,
+        DataImportToGracefulRunnerInterface $gracefulRunnerFacade,
+        ?DataImportConfig $config = null
+    ) {
         $this->importType = $importType;
         $this->dataReader = $dataReader;
         $this->gracefulRunnerFacade = $gracefulRunnerFacade;
+        $this->config = $config;
     }
 
     /**
@@ -224,17 +228,27 @@ class DataImporter implements
                         throw new DataImportException($exceptionMessage, 0, $dataImportException);
                     }
 
-                    ErrorLogger::getInstance()->log($dataImportException);
+                    if ($this->getDefaultAmountOfErrors() >= $dataImporterReportTransfer->getMessages()->count()) {
+                        ErrorLogger::getInstance()->log($dataImportException);
+                        $dataImporterReportMessageTransfer = $this->createDataSetExceptionReportMessage(
+                            $dataImportException,
+                            $dataReader,
+                            $dataSet,
+                        );
+                        $dataImporterReportTransfer
+                            ->setIsSuccess(false)
+                            ->addMessage($dataImporterReportMessageTransfer);
 
-                    $dataImporterReportMessageTransfer = $this->createDataSetExceptionReportMessage(
-                        $dataImportException,
-                        $dataReader,
-                        $dataSet,
-                    );
-
-                    $dataImporterReportTransfer
-                        ->setIsSuccess(false)
-                        ->addMessage($dataImporterReportMessageTransfer);
+                        if ($dataImporterReportTransfer->getMessages()->count() === $this->getDefaultAmountOfErrors()) {
+                            $dataImporterReportTransfer
+                                ->setIsSuccess(false)
+                                ->addMessage((new DataImporterReportMessageTransfer())
+                                    ->setMessage(sprintf(
+                                        'ALERT: Amount of errors to log has been reached limit `%s`. Further errors will be not logged. To change the limit change `DataImporter::DEFAULT_AMOUNT_OF_ERRORS`',
+                                        $this->getDefaultAmountOfErrors(),
+                                    )));
+                        }
+                    }
                 }
 
                 unset($dataSet);
@@ -436,5 +450,14 @@ class DataImporter implements
         }
 
         return $dataImporterReportMessageTransfer;
+    }
+
+    protected function getDefaultAmountOfErrors(): int
+    {
+        if ($this->config !== null) {
+            return $this->config->getDefaultAmountOfErrors();
+        }
+
+        return static::DEFAULT_AMOUNT_OF_ERRORS;
     }
 }

@@ -62,6 +62,8 @@ class DataImportConfig extends AbstractBundleConfig
      */
     protected const BULK_MODE_MEMORY_THRESHOLD_PERCENT = 30;
 
+    protected const int DEFAULT_AMOUNT_OF_ERRORS = 50;
+
     /**
      * @api
      *
@@ -179,6 +181,20 @@ class DataImportConfig extends AbstractBundleConfig
     public function getBulkWriteMemoryThesoldPercent(): int
     {
         return $this->get(DataImportConstants::BULK_MODE_MEMORY_THESHOLD_PERCENT, static::BULK_MODE_MEMORY_THRESHOLD_PERCENT);
+    }
+
+    /**
+     * Specification:
+     * - Returns the default amount of errors to log during data import.
+     * - When this limit is reached, further errors will not be logged.
+     *
+     * @api
+     *
+     * @return int
+     */
+    public function getDefaultAmountOfErrors(): int
+    {
+        return $this->get(DataImportConstants::DEFAULT_AMOUNT_OF_ERRORS, static::DEFAULT_AMOUNT_OF_ERRORS);
     }
 
     /**

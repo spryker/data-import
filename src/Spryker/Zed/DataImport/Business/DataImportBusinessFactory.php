@@ -192,7 +192,7 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
      */
     public function createDataImporter($importType, DataReaderInterface $reader)
     {
-        return new DataImporter($importType, $reader, $this->getGracefulRunnerFacade());
+        return new DataImporter($importType, $reader, $this->getGracefulRunnerFacade(), $this->getConfig());
     }
 
     /**
@@ -220,6 +220,7 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
             $this->getQueueClient(),
             $this->createQueueMessageHelper(),
             $this->getGracefulRunnerFacade(),
+            $this->getConfig(),
         );
     }
 
@@ -239,7 +240,7 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
      */
     public function createDataImporterWriterAware($importType, DataReaderInterface $reader)
     {
-        return new DataImporterDataSetWriterAware($importType, $reader, $this->getGracefulRunnerFacade());
+        return new DataImporterDataSetWriterAware($importType, $reader, $this->getGracefulRunnerFacade(), $this->getConfig());
     }
 
     /**

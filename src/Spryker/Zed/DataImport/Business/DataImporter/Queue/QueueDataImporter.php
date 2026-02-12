@@ -53,9 +53,10 @@ class QueueDataImporter extends DataImporterDataSetWriterAware implements QueueD
         DataReaderInterface $dataReader,
         DataImportToQueueClientInterface $queueClient,
         QueueMessageHelperInterface $queueMessageHelper,
-        DataImportToGracefulRunnerInterface $gracefulRunnerFacade
+        DataImportToGracefulRunnerInterface $gracefulRunnerFacade,
+        ?DataImportConfig $config = null
     ) {
-        parent::__construct($importType, $dataReader, $gracefulRunnerFacade);
+        parent::__construct($importType, $dataReader, $gracefulRunnerFacade, $config);
 
         $this->queueClient = $queueClient;
         $this->queueMessageHelper = $queueMessageHelper;

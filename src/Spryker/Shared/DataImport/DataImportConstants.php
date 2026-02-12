@@ -106,6 +106,17 @@ interface DataImportConstants
 
     /**
      * Specification:
+     * - Defines the default amount of errors to log during data import.
+     * - When this limit is reached, further errors will not be logged.
+     *
+     * @api
+     *
+     * @var string
+     */
+    public const DEFAULT_AMOUNT_OF_ERRORS = 'DATA_IMPORT:DEFAULT_AMOUNT_OF_ERRORS';
+
+    /**
+     * Specification:
      *  - Returns true if data import from other source is enabled.
      *
      * @api
