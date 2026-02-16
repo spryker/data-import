@@ -6,6 +6,8 @@ parameters:
         - '#Call to an undefined method .+DataImporterInterface::import\(\).#'
         - '#Call to an undefined method .+DataImporterPluginCollectionInterface::addDataImporterPlugins\(\).#'
         - '#Call to an undefined method .+DataImporterPluginCollectionInterface::addDataImporter\(\).#'
+        - '#PHPDoc tag @SuppressWarnings has invalid value#'
+        - '#Trait .+ is used zero times and is not analysed#'
         -
             identifier: missingType.iterableValue
     reportUnmatchedIgnoredErrors: false
