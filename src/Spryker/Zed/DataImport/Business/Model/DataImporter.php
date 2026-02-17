@@ -85,8 +85,14 @@ class DataImporter implements
      */
     protected ?string $dataSetIdentifierKey = null;
 
+    /**
+     * @param string $importType
+     * @param \Spryker\Zed\DataImport\Business\Model\DataReader\DataReaderInterface $dataReader
+     * @param \Spryker\Zed\DataImport\Dependency\Facade\DataImportToGracefulRunnerInterface $gracefulRunnerFacade
+     * @param \Spryker\Zed\DataImport\DataImportConfig|null $config
+     */
     public function __construct(
-        string $importType,
+        $importType,
         DataReaderInterface $dataReader,
         DataImportToGracefulRunnerInterface $gracefulRunnerFacade,
         ?DataImportConfig $config = null
