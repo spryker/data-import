@@ -39,13 +39,13 @@ class DataSetWriterCollection implements DataSetWriterInterface
              * `\Spryker\Zed\DataImportExtension\Dependency\Plugin\DataSetWriterPluginInterface` is removed.
              */
             if ($dataSetWriter instanceof DataSetWriterPluginInterface) {
-                /** @phpstan-var \Generated\Shared\Transfer\DataSetItemTransfer $dataSet */
+                /** @phpstan-var \Spryker\Zed\DataImportExtension\Dependency\Plugin\DataSetWriterPluginInterface $dataSetWriter */
                 $dataSetWriter->write($dataSet);
 
                 continue;
             }
 
-            /** @phpstan-var \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet */
+            /** @phpstan-var \Spryker\Zed\DataImportExtension\Dependency\Plugin\DataSetItemWriterPluginInterface $dataSetWriter */
             $dataSetItemTransfer = $this->mapDataSetToDataSetItemTransfer($dataSet);
             $dataSetWriter->write($dataSetItemTransfer);
         }
@@ -76,19 +76,16 @@ class DataSetWriterCollection implements DataSetWriterInterface
     /**
      * Generates DatasetWritersPlugins that are matching conditions.
      *
-     * @return \Generator<\Spryker\Zed\DataImportExtension\Dependency\Plugin\DataSetItemWriterPluginInterface|null>
+     * @return \Generator<\Spryker\Zed\DataImportExtension\Dependency\Plugin\DataSetWriterPluginInterface|\Spryker\Zed\DataImportExtension\Dependency\Plugin\DataSetItemWriterPluginInterface>
      */
     protected function getDatasetWriters()
     {
-        /**
-         * @var \Spryker\Zed\DataImportExtension\Dependency\Plugin\DataSetWriterPluginApplicableAwareInterface $dataSetWriter
-         */
         foreach ($this->dataSetWriters as $dataSetWriter) {
+            /** @phpstan-ignore instanceof.alwaysTrue */
             if (
                 !$dataSetWriter instanceof DataSetWriterPluginApplicableAwareInterface
                 || $dataSetWriter->isApplicable()
             ) {
-                /** @phpstan-var \Spryker\Zed\DataImportExtension\Dependency\Plugin\DataSetItemWriterPluginInterface $dataSetWriter */
                 yield $dataSetWriter;
             }
         }
