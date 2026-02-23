@@ -180,7 +180,7 @@ class DataSetStepBrokerTransactionAwareTest extends Unit
 
         $propelConnectionMock = $mockBuilder->getMock();
 
-        $propelConnectionMock->method('inTransaction')->will($this->onConsecutiveCalls(...$isInTransaction));
+        $propelConnectionMock->method('inTransaction')->willReturnOnConsecutiveCalls(...$isInTransaction);
         $propelConnectionMock->expects($this->exactly($beginTransactionCalledCount))->method('beginTransaction');
         $propelConnectionMock->expects($this->exactly($endTransactionCalledCount))->method('endTransaction');
 

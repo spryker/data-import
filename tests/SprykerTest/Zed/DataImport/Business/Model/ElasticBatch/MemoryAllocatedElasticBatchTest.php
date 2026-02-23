@@ -42,7 +42,7 @@ class MemoryAllocatedElasticBatchTest extends Unit
         $phpSystemMemoryMock = $this->getPhpSystemMemoryMock($megaByte * 1024);
 
         $phpSystemMemoryMock->method('getCurrentMemoryUsage')
-            ->will($this->onConsecutiveCalls(
+            ->willReturnOnConsecutiveCalls(
             // Each new line means new batch on items started
                 // phpcs:ignore
                 $megaByte * 10, $megaByte * 20, $megaByte * 30,
@@ -53,10 +53,10 @@ class MemoryAllocatedElasticBatchTest extends Unit
                 // phpcs:ignore
                 $megaByte * 220, $megaByte * 450,
                 $megaByte * 470,
-            ));
+            );
 
         $phpSystemMemoryMock->method('getMemoryUsagePeak')
-            ->will($this->onConsecutiveCalls(
+            ->willReturnOnConsecutiveCalls(
             // Each new line means new batch on items started
                 // phpcs:ignore
                 $megaByte * 35, $megaByte * 70, $megaByte * 105,
@@ -67,7 +67,7 @@ class MemoryAllocatedElasticBatchTest extends Unit
                 // phpcs:ignore
                 $megaByte * 770, $megaByte * 805,
                 $megaByte * 900,
-            ));
+            );
 
         $memoryAllocatedElasticBatch = $this->createMemoryAllocatedElasticBatch(
             $phpSystemMemoryMock,

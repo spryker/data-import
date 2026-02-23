@@ -92,7 +92,9 @@ class AbstractQueueWriterPluginTest extends Unit
      */
     protected function getAbstractQueueDataWriterPluginMock(int $chunkSize): AbstractQueueWriterPlugin
     {
-        $abstractQueueDataWriterPluginMock = $this->getMockForAbstractClass(AbstractQueueWriterPlugin::class);
+        $abstractQueueDataWriterPluginMock = $this->getMockBuilder(AbstractQueueWriterPlugin::class)
+            ->onlyMethods(['getQueueName', 'getChunkSize'])
+            ->getMock();
         $abstractQueueDataWriterPluginMock->method('getQueueName')->willReturn(static::DUMMY_QUEUE_NAME);
         $abstractQueueDataWriterPluginMock->method('getChunkSize')->willReturn($chunkSize);
 
