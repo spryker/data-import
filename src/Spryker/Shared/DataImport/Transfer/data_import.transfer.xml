@@ -89,6 +89,7 @@
         <property name="source" type="string"/>
         <property name="fileSystem" type="string" strict="true"/>
         <property name="context" type="DataImporterConfigurationContext" strict="true"/>
+        <property name="dataImporterConfiguration" type="DataImporterConfiguration"/>
     </transfer>
 
     <transfer name="EventEntity">

@@ -230,10 +230,13 @@ class DataImportConfig extends AbstractBundleConfig
     public function buildImporterConfigurationByDataImportConfigAction(
         DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer
     ): DataImporterConfigurationTransfer {
-        $dataImportReaderConfigurationTransfer = new DataImporterReaderConfigurationTransfer();
-        $dataImportReaderConfigurationTransfer
-            ->setFileName($dataImportConfigurationActionTransfer->getSource())
-            ->setFileSystem($dataImportConfigurationActionTransfer->getFilesystem());
+        $dataImportReaderConfigurationTransfer = $dataImportConfigurationActionTransfer->getDataImporterConfiguration()?->getReaderConfiguration();
+        if ($dataImportReaderConfigurationTransfer === null) {
+            $dataImportReaderConfigurationTransfer = new DataImporterReaderConfigurationTransfer();
+            $dataImportReaderConfigurationTransfer
+                ->setFileName($dataImportConfigurationActionTransfer->getSource())
+                ->setFileSystem($dataImportConfigurationActionTransfer->getFilesystem());
+        }
 
         $dataImporterConfigurationTransfer = new DataImporterConfigurationTransfer();
         $dataImporterConfigurationTransfer

@@ -89,6 +89,7 @@ class DataImportExecutor implements DataImportExecutorInterface
             $dataImporterConfigurationTransfer = $this->buildDataImportConfiguration($input, $dataImportConfigurationActionTransfer->getDataEntity());
             $dataImporterConfigurationTransfer->getReaderConfiguration()->setFileName($dataImportConfigurationActionTransfer->getSource());
             $dataImporterConfigurationTransfer->getReaderConfiguration()->setFileSystem($dataImportConfigurationActionTransfer->getFileSystem());
+            $dataImportConfigurationActionTransfer->setDataImporterConfiguration($dataImporterConfigurationTransfer);
 
             $dataImporterReportTransfer = $this->dataImportFacade->importByAction($dataImportConfigurationActionTransfer, $dataImporterConfigurationTransfer);
 
