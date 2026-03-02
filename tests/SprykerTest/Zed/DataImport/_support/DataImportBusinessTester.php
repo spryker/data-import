@@ -60,17 +60,11 @@ class DataImportBusinessTester extends Actor
      */
     protected const TEST_EVENT_MODIFIED_COLUMN = 'bar';
 
-    /**
-     * @return \Generated\Shared\Transfer\EventEntityTransfer
-     */
     public function createRegularEventEntityTransfer(): EventEntityTransfer
     {
         return (new EventEntityTransfer())->setId(static::TEST_ENTITY_ID_1);
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\EventEntityTransfer
-     */
     public function createExtendedEventEntityTransfer(): EventEntityTransfer
     {
         return (new EventEntityTransfer())
@@ -81,11 +75,6 @@ class DataImportBusinessTester extends Actor
             ->setModifiedColumns([static::TEST_EVENT_MODIFIED_COLUMN]);
     }
 
-    /**
-     * @param array $seed
-     *
-     * @return \Generated\Shared\Transfer\StoreTransfer
-     */
     public function buildStoreTransfer(array $seed = []): StoreTransfer
     {
         return (new StoreBuilder($seed))->build();

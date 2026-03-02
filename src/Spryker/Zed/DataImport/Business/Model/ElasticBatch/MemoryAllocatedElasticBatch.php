@@ -78,10 +78,6 @@ class MemoryAllocatedElasticBatch implements ElasticBatchInterface
      */
     protected $systemMemory;
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\Memory\SystemMemoryInterface $systemMemory
-     * @param \Spryker\Zed\DataImport\DataImportConfig $config
-     */
     public function __construct(SystemMemoryInterface $systemMemory, DataImportConfig $config)
     {
         $this->systemMemory = $systemMemory;
@@ -158,27 +154,16 @@ class MemoryAllocatedElasticBatch implements ElasticBatchInterface
         static::$batchCounter++;
     }
 
-    /**
-     * @return int
-     */
     protected function getMemoryUsed(): int
     {
         return static::$memoryUsed;
     }
 
-    /**
-     * @param int $memoryUsed
-     *
-     * @return void
-     */
     protected function setMemoryUsed(int $memoryUsed): void
     {
         static::$memoryUsed = $memoryUsed;
     }
 
-    /**
-     * @return void
-     */
     protected function decreaseGradualityFactorCounter(): void
     {
         if (static::$gradualityFactorCounter > 1) {
@@ -264,19 +249,11 @@ class MemoryAllocatedElasticBatch implements ElasticBatchInterface
         return round($this->systemMemory->getMemoryUsagePeak() / $this->getMemoryUsed(), 2);
     }
 
-    /**
-     * @return float
-     */
     protected function getMemoryPeakFactor(): float
     {
         return static::$memoryPeakFactor;
     }
 
-    /**
-     * @param float $memoryPeakFactor
-     *
-     * @return void
-     */
     protected function setMemoryPeakFactor(float $memoryPeakFactor): void
     {
         static::$memoryPeakFactor = $memoryPeakFactor;

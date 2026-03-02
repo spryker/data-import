@@ -17,19 +17,11 @@ class DataImportException extends Exception
      */
     protected ?ErrorTransfer $errorTransfer = null;
 
-    /**
-     * @param \Generated\Shared\Transfer\ErrorTransfer $errorTransfer
-     *
-     * @return void
-     */
     public function setError(ErrorTransfer $errorTransfer): void
     {
         $this->errorTransfer = $errorTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ErrorTransfer|null
-     */
     public function findError(): ?ErrorTransfer
     {
         return $this->errorTransfer;

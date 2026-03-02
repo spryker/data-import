@@ -34,9 +34,6 @@ use Spryker\Zed\DataImport\Dependency\Propel\DataImportToPropelConnectionInterfa
  */
 class DataSetStepBrokerElasticBatchTransactionAwareTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testExecuteOpensTransactionOnFirstCall(): void
     {
         //Arrange
@@ -53,9 +50,6 @@ class DataSetStepBrokerElasticBatchTransactionAwareTest extends Unit
         $elasticBatchDataSetStepBrokerTransactionAware->execute($dataSet);
     }
 
-    /**
-     * @return void
-     */
     public function testTransactionNotOpenedWhenAlreadyInTransaction(): void
     {
         //Arrange
@@ -72,9 +66,6 @@ class DataSetStepBrokerElasticBatchTransactionAwareTest extends Unit
         $elasticBatchDataSetStepBrokerTransactionAware->execute($dataSet);
     }
 
-    /**
-     * @return void
-     */
     public function testThrowsExceptionIfNoOpenTransactionGiven(): void
     {
         //Arrange
@@ -89,9 +80,6 @@ class DataSetStepBrokerElasticBatchTransactionAwareTest extends Unit
         $elasticBatchDataSetStepBrokerTransactionAware->execute($dataSet);
     }
 
-    /**
-     * @return void
-     */
     public function testTransactionRollBackOnWriterException(): void
     {
         //Arrange
@@ -141,9 +129,6 @@ class DataSetStepBrokerElasticBatchTransactionAwareTest extends Unit
         return $csvReader->current();
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerElasticBatchTransactionAware
-     */
     protected function createElasticBatchStepBroker(): DataSetStepBrokerElasticBatchTransactionAware
     {
         return $this->tester->getFactory()->createElasticBatchTransactionAwareDataSetStepBroker();
@@ -190,14 +175,6 @@ class DataSetStepBrokerElasticBatchTransactionAwareTest extends Unit
         return $csvReader;
     }
 
-    /**
-     * @param string $fileName
-     * @param bool $hasHeader
-     * @param int|null $offset
-     * @param int|null $limit
-     *
-     * @return \Generated\Shared\Transfer\DataImporterReaderConfigurationTransfer
-     */
     protected function getCsvReaderConfigurationTransfer(
         string $fileName,
         bool $hasHeader = true,

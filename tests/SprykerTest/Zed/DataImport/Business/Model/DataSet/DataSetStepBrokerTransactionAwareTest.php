@@ -29,9 +29,6 @@ use Spryker\Zed\DataImport\Dependency\Propel\DataImportToPropelConnectionInterfa
  */
 class DataSetStepBrokerTransactionAwareTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testExecuteOpensTransactionOnFirstCall(): void
     {
         $propelConnectionMock = $this->getPropelConnectionMock(1, 1, false, true);
@@ -42,9 +39,6 @@ class DataSetStepBrokerTransactionAwareTest extends Unit
         $dataSetStepBrokerTransactionAware->execute($dataSet);
     }
 
-    /**
-     * @return void
-     */
     public function testTransactionOnlyOpenedOnceForConfiguredBulkSize(): void
     {
         $propelConnectionMock = $this->getPropelConnectionMock(1, 1, false, true, true);
@@ -56,9 +50,6 @@ class DataSetStepBrokerTransactionAwareTest extends Unit
         $dataSetStepBrokerTransactionAware->execute($dataSet);
     }
 
-    /**
-     * @return void
-     */
     public function testTransactionIsOpenedForeachConfiguredBulkSize(): void
     {
         $propelConnectionMock = $this->getPropelConnectionMock(2, 2, false, true, true, false, true, true);
@@ -72,9 +63,6 @@ class DataSetStepBrokerTransactionAwareTest extends Unit
         $dataSetStepBrokerTransactionAware->execute($dataSet);
     }
 
-    /**
-     * @return void
-     */
     public function testTransactionNotOpenedWhenAlreadyInTransaction(): void
     {
         $propelConnectionMock = $this->getPropelConnectionMock(0, 1, true, true);
@@ -85,9 +73,6 @@ class DataSetStepBrokerTransactionAwareTest extends Unit
         $dataSetStepBrokerTransactionAware->execute($dataSet);
     }
 
-    /**
-     * @return void
-     */
     public function testTransactionIsClosedForeachConfiguredBulkSize(): void
     {
         $propelConnectionMock = $this->getPropelConnectionMock(1, 1, false, true);
@@ -98,9 +83,6 @@ class DataSetStepBrokerTransactionAwareTest extends Unit
         $dataSetStepBrokerTransactionAware->execute($dataSet);
     }
 
-    /**
-     * @return void
-     */
     public function testTransactionIsOnlyClosedOnceForConfiguredBulkSize(): void
     {
         $propelConnectionMock = $this->getPropelConnectionMock(1, 1, false, true, true);
@@ -112,9 +94,6 @@ class DataSetStepBrokerTransactionAwareTest extends Unit
         $dataSetStepBrokerTransactionAware->execute($dataSet);
     }
 
-    /**
-     * @return void
-     */
     public function testTransactionIsAlwaysClosedWhenThereIsAnOpenedOne(): void
     {
         $propelConnectionMock = $this->getPropelConnectionMock(2, 2, false, true, true, false, true, true);
@@ -128,9 +107,6 @@ class DataSetStepBrokerTransactionAwareTest extends Unit
         $dataSetStepBrokerTransactionAware->execute($dataSet);
     }
 
-    /**
-     * @return void
-     */
     public function testThrowsExceptionIfNoOpenTransactionGiven(): void
     {
         //Arrange
@@ -147,9 +123,6 @@ class DataSetStepBrokerTransactionAwareTest extends Unit
         $dataSetStepBrokerTransactionAware->execute($dataSet);
     }
 
-    /**
-     * @return void
-     */
     public function testTransactionRollBackOnWriterException(): void
     {
         //Arrange

@@ -30,23 +30,11 @@ class DataImporterHelper extends Module
 {
     use StaticVariablesHelper;
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _after(TestInterface $test): void
     {
         $this->resetStaticCaches();
     }
 
-    /**
-     * @param string $importType
-     * @param bool $isCalled
-     * @param \Generated\Shared\Transfer\DataImporterReportTransfer|null $dataImporterReportTransfer
-     *
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface
-     */
     public function getDataImporterMock(
         string $importType,
         bool $isCalled = false,
@@ -107,13 +95,6 @@ class DataImporterHelper extends Module
         return $dataImporterStub;
     }
 
-    /**
-     * @param string $importType
-     * @param bool $isCalled
-     * @param \Generated\Shared\Transfer\DataImporterReportTransfer|null $dataImporterReportTransfer
-     *
-     * @return \Spryker\Zed\DataImport\Dependency\Plugin\DataImportPluginInterface
-     */
     public function getDataImporterPluginMock(
         string $importType,
         bool $isCalled = false,
@@ -138,9 +119,6 @@ class DataImporterHelper extends Module
         return $dataImporterPluginStub;
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface
-     */
     public function getDataImportStepMock(): DataImportStepInterface
     {
         /** @var \Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface $dataSetStub */
@@ -149,9 +127,6 @@ class DataImporterHelper extends Module
         return $dataSetStub;
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface
-     */
     public function getFailingDataImportStepMock(): DataImportStepInterface
     {
         $executeCallback = function (): void {
@@ -163,9 +138,6 @@ class DataImporterHelper extends Module
         return $dataSetStub;
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerInterface
-     */
     public function getDataSetMock(): DataSetStepBrokerInterface
     {
         /** @var \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerInterface $dataSetStub */
@@ -174,9 +146,6 @@ class DataImporterHelper extends Module
         return $dataSetStub;
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterBeforeImportInterface
-     */
     public function getBeforeImportHookMock(): DataImporterBeforeImportInterface
     {
         /** @var \Spryker\Zed\DataImport\Business\Model\DataImporterBeforeImportInterface $beforeHook */
@@ -187,9 +156,6 @@ class DataImporterHelper extends Module
         return $beforeHook;
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterAfterImportInterface
-     */
     public function getAfterImportHookMock(): DataImporterAfterImportInterface
     {
         /** @var \Spryker\Zed\DataImport\Business\Model\DataImporterAfterImportInterface $beforeHook */
@@ -221,12 +187,6 @@ class DataImporterHelper extends Module
         return new DataReaderStub($dataSets);
     }
 
-    /**
-     * @param string $propertyName
-     * @param mixed|null $value
-     *
-     * @return void
-     */
     public function setDataImporterPublisherProperty(string $propertyName, mixed $value = null): void
     {
         $this->cleanupStaticCache(DataImporterPublisher::class, $propertyName, $value);

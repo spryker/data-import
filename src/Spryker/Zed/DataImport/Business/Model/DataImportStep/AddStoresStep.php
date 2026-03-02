@@ -22,18 +22,10 @@ class AddStoresStep implements DataImportStepInterface
      */
     protected array $stores = [];
 
-    /**
-     * @param \Spryker\Zed\DataImport\Dependency\Facade\DataImportToStoreFacadeInterface $storeFacade
-     */
     public function __construct(protected DataImportToStoreFacadeInterface $storeFacade)
     {
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         if (!$this->stores) {

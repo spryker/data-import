@@ -40,9 +40,6 @@ class ImportDumperTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testDumpByImportConfigurationReturnsListOfAppliedImporters(): void
     {
         // Arrange
@@ -71,9 +68,6 @@ class ImportDumperTest extends Unit
         $this->assertSame(DataImportStubPlugin::class, $dumpedImportersList['dummy']);
     }
 
-    /**
-     * @return void
-     */
     public function testDumpByImportConfigurationReturnsEmptyListIfNoImporterFound(): void
     {
         // Arrange

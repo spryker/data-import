@@ -22,12 +22,6 @@ class DataImportToFlysystemServiceBridge implements DataImportToFlysystemService
         $this->flysystemService = $flysystemService;
     }
 
-    /**
-     * @param string $filesystemName
-     * @param string $path
-     *
-     * @return bool
-     */
     public function has(string $filesystemName, string $path): bool
     {
         return $this->flysystemService->has($filesystemName, $path);

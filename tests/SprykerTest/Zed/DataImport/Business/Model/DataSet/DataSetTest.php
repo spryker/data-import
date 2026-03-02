@@ -25,9 +25,6 @@ use Spryker\Zed\DataImport\Business\Exception\DataKeyNotFoundInDataSetException;
  */
 class DataSetTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testGetValueWithUndefinedKeyThrowsException(): void
     {
         $dataSet = $this->tester->getFactory()->createDataSet();
@@ -35,9 +32,6 @@ class DataSetTest extends Unit
         $dataSet['undefinedKey'];
     }
 
-    /**
-     * @return void
-     */
     public function testUnsetValueWithUndefinedKeyThrowsException(): void
     {
         $dataSet = $this->tester->getFactory()->createDataSet();
@@ -45,9 +39,6 @@ class DataSetTest extends Unit
         unset($dataSet['undefinedKey']);
     }
 
-    /**
-     * @return void
-     */
     public function testExchangeArraySetsNewArray(): void
     {
         $oldData = ['old'];
@@ -59,9 +50,6 @@ class DataSetTest extends Unit
         $this->assertSame($newData, $dataSet->getArrayCopy());
     }
 
-    /**
-     * @return void
-     */
     public function testCheckIsSetValue(): void
     {
         $dataSet = $this->tester->getFactory()->createDataSet([]);
@@ -78,9 +66,6 @@ class DataSetTest extends Unit
         $this->assertTrue(isset($dataSet['int']));
     }
 
-    /**
-     * @return void
-     */
     public function testCheckEmptyValue(): void
     {
         $dataSet = $this->tester->getFactory()->createDataSet([]);

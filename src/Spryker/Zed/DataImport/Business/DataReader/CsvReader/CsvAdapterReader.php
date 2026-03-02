@@ -88,11 +88,6 @@ class CsvAdapterReader implements DataReaderInterface, ConfigurableDataReaderInt
      */
     protected DataImportToFlysystemServiceInterface $flysystemService;
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataReader\CsvReader\CsvReaderConfigurationInterface $csvReaderConfiguration
-     * @param \Spryker\Zed\DataImport\Dependency\Service\DataImportToFlysystemServiceInterface $flysystemService
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     */
     public function __construct(
         CsvReaderConfigurationInterface $csvReaderConfiguration,
         DataImportToFlysystemServiceInterface $flysystemService,
@@ -121,9 +116,6 @@ class CsvAdapterReader implements DataReaderInterface, ConfigurableDataReaderInt
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function valid(): bool
     {
         if ($this->limit !== null && $this->limit !== 0) {
@@ -135,9 +127,6 @@ class CsvAdapterReader implements DataReaderInterface, ConfigurableDataReaderInt
         return $this->importableKey < $this->count;
     }
 
-    /**
-     * @return void
-     */
     public function rewind(): void
     {
         rewind($this->fileObject);
@@ -152,17 +141,11 @@ class CsvAdapterReader implements DataReaderInterface, ConfigurableDataReaderInt
         }
     }
 
-    /**
-     * @return int
-     */
     public function key(): int
     {
         return $this->key;
     }
 
-    /**
-     * @return void
-     */
     public function next(): void
     {
         $this->getRowAndGoNext();
@@ -178,9 +161,6 @@ class CsvAdapterReader implements DataReaderInterface, ConfigurableDataReaderInt
         return $this->getRow();
     }
 
-    /**
-     * @return int
-     */
     public function count(): int
     {
         if (!$this->count) {
@@ -239,9 +219,6 @@ class CsvAdapterReader implements DataReaderInterface, ConfigurableDataReaderInt
         return $this->dataSet;
     }
 
-    /**
-     * @return void
-     */
     protected function configureReader(): void
     {
         $this->createFileObject();
@@ -282,9 +259,6 @@ class CsvAdapterReader implements DataReaderInterface, ConfigurableDataReaderInt
         }
     }
 
-    /**
-     * @return void
-     */
     protected function setDataSetKeys(): void
     {
         if ($this->csvReaderConfiguration->hasHeader() === false) {
@@ -294,9 +268,6 @@ class CsvAdapterReader implements DataReaderInterface, ConfigurableDataReaderInt
         $this->dataSetKeys = $this->getRowAndGoNext();
     }
 
-    /**
-     * @return void
-     */
     protected function setOffsetAndLimit(): void
     {
         $this->offset = $this->csvReaderConfiguration->getOffset();
@@ -336,9 +307,6 @@ class CsvAdapterReader implements DataReaderInterface, ConfigurableDataReaderInt
         return $row;
     }
 
-    /**
-     * @return void
-     */
     protected function calculateCount(): void
     {
         $this->count = 0;
@@ -356,11 +324,6 @@ class CsvAdapterReader implements DataReaderInterface, ConfigurableDataReaderInt
         $this->rewind();
     }
 
-    /**
-     * @param array $row
-     *
-     * @return bool
-     */
     protected function isEmpty(array $row): bool
     {
         if (count($row) == 1 && $row[0] == '') {
@@ -370,25 +333,16 @@ class CsvAdapterReader implements DataReaderInterface, ConfigurableDataReaderInt
         return false;
     }
 
-    /**
-     * @return void
-     */
     protected function incrementKey(): void
     {
         $this->key++;
     }
 
-    /**
-     * @return void
-     */
     protected function incrementImportableKey(): void
     {
         $this->importableKey++;
     }
 
-    /**
-     * @return void
-     */
     protected function resetKeys(): void
     {
         $this->key = 0;

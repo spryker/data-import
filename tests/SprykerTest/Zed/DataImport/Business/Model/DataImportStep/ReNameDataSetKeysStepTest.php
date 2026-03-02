@@ -40,9 +40,6 @@ class ReNameDataSetKeysStepTest extends Unit
      */
     public const VALUE_A = 'value a';
 
-    /**
-     * @return void
-     */
     public function testExecuteReNamesKeysInDataSet(): void
     {
         $dataSet = $this->tester->getFactory()->createDataSet([
@@ -58,14 +55,6 @@ class ReNameDataSetKeysStepTest extends Unit
         $this->assertKeyIsReNamed(static::NEW_KEY_A, static::ORIGINAL_KEY_A, static::VALUE_A, $dataSet);
     }
 
-    /**
-     * @param string $newKey
-     * @param string $oldKey
-     * @param string $value
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSet $dataSet
-     *
-     * @return void
-     */
     protected function assertKeyIsReNamed(string $newKey, string $oldKey, string $value, DataSet $dataSet): void
     {
         $this->assertArrayNotHasKey($oldKey, $dataSet, sprintf('Expected that "%s" is no longer present in data set but was found in data set.', $oldKey));

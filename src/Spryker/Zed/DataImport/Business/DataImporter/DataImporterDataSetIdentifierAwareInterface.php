@@ -9,10 +9,5 @@ namespace Spryker\Zed\DataImport\Business\DataImporter;
 
 interface DataImporterDataSetIdentifierAwareInterface
 {
-    /**
-     * @param string $dataSetIdentifierKey
-     *
-     * @return void
-     */
     public function setDataSetIdentifierKey(string $dataSetIdentifierKey): void;
 }

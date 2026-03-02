@@ -61,11 +61,6 @@ class DataSetWriterCollection implements DataSetWriterInterface
         }
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Generated\Shared\Transfer\DataSetItemTransfer
-     */
     protected function mapDataSetToDataSetItemTransfer(DataSetInterface $dataSet): DataSetItemTransfer
     {
         return (new DataSetItemTransfer())->setPayload(

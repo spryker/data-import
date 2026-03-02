@@ -262,13 +262,6 @@ class DataImportConfig extends AbstractBundleConfig
         return $this->get(DataImportConstants::OTHER_SOURCE_ENABLED, false);
     }
 
-    /**
-     * @param string $queueName
-     * @param string $importType
-     * @param array $queueConsumerOptions
-     *
-     * @return \Generated\Shared\Transfer\QueueDataImporterConfigurationTransfer
-     */
     protected function buildQueueDataImporterConfiguration(
         string $queueName,
         string $importType,

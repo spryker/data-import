@@ -14,19 +14,11 @@ class DataSetWriterPersistenceStateRegistry
      */
     protected static $isPersisted = true;
 
-    /**
-     * @return bool
-     */
     public static function getIsPersisted(): bool
     {
         return static::$isPersisted;
     }
 
-    /**
-     * @param bool $isPersisted
-     *
-     * @return void
-     */
     public static function setIsPersisted(bool $isPersisted): void
     {
         static::$isPersisted = $isPersisted;

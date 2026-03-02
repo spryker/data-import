@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\DataImportConfigurationTransfer;
 
 interface DataImportConfigurationParserInterface
 {
-    /**
-     * @param string $filename
-     *
-     * @return \Generated\Shared\Transfer\DataImportConfigurationTransfer
-     */
     public function parseConfigurationFile(string $filename): DataImportConfigurationTransfer;
 }

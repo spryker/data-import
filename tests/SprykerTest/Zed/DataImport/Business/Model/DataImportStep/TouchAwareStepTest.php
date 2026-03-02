@@ -43,9 +43,6 @@ class TouchAwareStepTest extends Unit
      */
     public const SUB_TOUCHABLE_KEY_B = 'sub touchable key b';
 
-    /**
-     * @return void
-     */
     public function testAfterExecuteWillReturnIfNoTouchableApplied(): void
     {
         $touchAwareStep = new TouchAwareStep($this->getTouchFacadeMock(0));
@@ -69,9 +66,6 @@ class TouchAwareStepTest extends Unit
         $touchAwareStep->afterExecute();
     }
 
-    /**
-     * @return array
-     */
     public function noBulkSizeDataProvider(): array
     {
         return [
@@ -81,9 +75,6 @@ class TouchAwareStepTest extends Unit
         ];
     }
 
-    /**
-     * @return void
-     */
     public function testAfterExecuteTriggersTouchForMainTouchableWhenBulkSizeOne(): void
     {
         $touchAwareStep = new TouchAwareStep($this->getTouchFacadeMock(), 1);
@@ -92,9 +83,6 @@ class TouchAwareStepTest extends Unit
         $touchAwareStep->afterExecute();
     }
 
-    /**
-     * @return void
-     */
     public function testAfterExecuteTriggersTouchWhenMainTouchableCountEqualsBulkSize(): void
     {
         $touchAwareStep = new TouchAwareStep($this->getTouchFacadeMock(), 2);
@@ -104,9 +92,6 @@ class TouchAwareStepTest extends Unit
         $touchAwareStep->afterExecute();
     }
 
-    /**
-     * @return void
-     */
     public function testAfterExecuteTriggersTouchForSubTouchableWhenMainTouchableCountEqualsBulkSize(): void
     {
         $touchAwareStep = new TouchAwareStep($this->getTouchFacadeMock(2), 2);
@@ -121,9 +106,6 @@ class TouchAwareStepTest extends Unit
         $touchAwareStep->afterExecute();
     }
 
-    /**
-     * @return void
-     */
     public function testAfterExecuteTriggersTouchForEachSubTouchableWhenMainTouchableCountEqualsBulkSize(): void
     {
         $touchAwareStep = new TouchAwareStep($this->getTouchFacadeMock(3), 2);

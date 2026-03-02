@@ -54,9 +54,6 @@ class QueueMessageHelperTest extends Unit
      */
     protected $queueMessageHelper;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -66,9 +63,6 @@ class QueueMessageHelperTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testMessageBodyIsDecoded(): void
     {
         $queueReceiveMessageTransfer = $this->getQueueReceiveMessageTransfer();
@@ -76,9 +70,6 @@ class QueueMessageHelperTest extends Unit
         $this->assertSame(static::DUMMY_MESSAGE_BODY, $this->queueMessageHelper->getDecodedMessageBody($queueReceiveMessageTransfer));
     }
 
-    /**
-     * @return void
-     */
     public function testFailedMessageIsHandledAsErrorMessage(): void
     {
         $queueReceiveMessageTransfer = $this->getQueueReceiveMessageTransfer();
@@ -91,9 +82,6 @@ class QueueMessageHelperTest extends Unit
         $this->assertSame('error', $result->getRoutingKey());
     }
 
-    /**
-     * @return void
-     */
     public function testSuccessMessageIsHandled(): void
     {
         $queueReceiveMessageTransfer = $this->getQueueReceiveMessageTransfer([
@@ -103,9 +91,6 @@ class QueueMessageHelperTest extends Unit
         $this->assertTrue($result->getAcknowledge());
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Dependency\Service\DataImportToUtilEncodingServiceInterface
-     */
     protected function getUtilEncodingService(): DataImportToUtilEncodingServiceInterface
     {
         return new DataImportToUtilEncodingServiceBridge(

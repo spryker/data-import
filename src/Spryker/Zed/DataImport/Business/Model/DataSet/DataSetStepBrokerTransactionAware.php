@@ -62,9 +62,6 @@ class DataSetStepBrokerTransactionAware extends DataSetStepBroker
         $this->afterDataSetExecution();
     }
 
-    /**
-     * @return void
-     */
     protected function rollbackTransaction(): void
     {
         $this->propelConnection->rollBack();

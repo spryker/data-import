@@ -29,9 +29,6 @@ class DataSetBrokerTransactionFailedException extends Exception implements Trans
         parent::__construct($message, $code, $previous);
     }
 
-    /**
-     * @return int
-     */
     public function getRolledBackRowsCount(): int
     {
         return $this->rolledBackRowsCount;

@@ -55,9 +55,6 @@ class AbstractQueueWriterPluginTest extends Unit
         $this->resetAbstractQueueDataWriterPluginBuffer();
     }
 
-    /**
-     * @return void
-     */
     public function testBufferIsFlushed(): void
     {
         $configChunkSize = 3;
@@ -73,9 +70,6 @@ class AbstractQueueWriterPluginTest extends Unit
         $abstractQueueDataWriterPluginMock->flush();
     }
 
-    /**
-     * @return array
-     */
     public function getBufferTestData(): array
     {
         return [
@@ -138,9 +132,6 @@ class AbstractQueueWriterPluginTest extends Unit
         return $dataSetItemTransferCollection;
     }
 
-    /**
-     * @return void
-     */
     protected function resetAbstractQueueDataWriterPluginBuffer(): void
     {
         $reflection = new ReflectionProperty(AbstractQueueWriterPlugin::class, 'dataSetItemBuffer');

@@ -149,11 +149,6 @@ class DataImporter implements
         }
     }
 
-    /**
-     * @param string $dataSetIdentifierKey
-     *
-     * @return void
-     */
     public function setDataSetIdentifierKey(string $dataSetIdentifierKey): void
     {
         $this->dataSetIdentifierKey = $dataSetIdentifierKey;
@@ -178,11 +173,6 @@ class DataImporter implements
         return $dataImporterReportTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImporterConfigurationTransfer|null $dataImporterConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataImporterReportTransfer
-     */
     protected function importByDataImporterConfiguration(
         ?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null
     ): DataImporterReportTransfer {
@@ -277,24 +267,12 @@ class DataImporter implements
         return $dataImporterReportTransfer;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     * @param \Generated\Shared\Transfer\DataImporterReportTransfer $dataImporterReportTransfer
-     *
-     * @return void
-     */
     protected function processDataSet(DataSetInterface $dataSet, DataImporterReportTransfer $dataImporterReportTransfer): void
     {
         $this->importDataSet($dataSet);
         $dataImporterReportTransfer->setImportedDataSetCount($dataImporterReportTransfer->getImportedDataSetCount() + 1);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImporterReportTransfer $dataImporterReportTransfer
-     * @param \Spryker\Zed\DataImport\Business\Exception\TransactionRolledBackAwareExceptionInterface $exception
-     *
-     * @return \Generated\Shared\Transfer\DataImporterReportTransfer
-     */
     protected function recalculateImportedDataSetCount(
         DataImporterReportTransfer $dataImporterReportTransfer,
         TransactionRolledBackAwareExceptionInterface $exception
@@ -340,19 +318,11 @@ class DataImporter implements
         return $this->importType;
     }
 
-    /**
-     * @param string $importGroup
-     *
-     * @return void
-     */
     public function setImportGroup(string $importGroup): void
     {
         $this->importGroup = $importGroup;
     }
 
-    /**
-     * @return string
-     */
     public function getImportGroup(): string
     {
         return $this->importGroup ?: DataImportConfig::IMPORT_GROUP_FULL;
@@ -417,11 +387,6 @@ class DataImporter implements
         return $message;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImporterConfigurationTransfer|null $dataImporterConfigurationTransfer
-     *
-     * @return string|null
-     */
     protected function getSourceFromDataImporterConfigurationTransfer(?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer): ?string
     {
         if ($dataImporterConfigurationTransfer && $dataImporterConfigurationTransfer->getReaderConfiguration()) {
@@ -431,13 +396,6 @@ class DataImporter implements
         return null;
     }
 
-    /**
-     * @param \Exception $dataImportException
-     * @param \Spryker\Zed\DataImport\Business\Model\DataReader\DataReaderInterface $dataReader
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Generated\Shared\Transfer\DataImporterReportMessageTransfer
-     */
     protected function createDataSetExceptionReportMessage(
         Exception $dataImportException,
         DataReaderInterface $dataReader,

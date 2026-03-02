@@ -25,9 +25,6 @@ use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
  */
 class DataImportCommunicationFactory extends AbstractCommunicationFactory
 {
-    /**
-     * @return \Spryker\Zed\DataImport\Communication\Console\Parser\DataImportConfigurationParserInterface
-     */
     public function createDataImportConfigurationYamlParser(): DataImportConfigurationParserInterface
     {
         return new DataImportConfigurationYamlParser(
@@ -36,17 +33,11 @@ class DataImportCommunicationFactory extends AbstractCommunicationFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Communication\Console\Mapper\DataImportConfigurationMapperInterface
-     */
     public function createDataImportConfigurationMapper(): DataImportConfigurationMapperInterface
     {
         return new DataImportConfigurationMapper();
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Communication\Console\Executor\DataImportExecutorInterface
-     */
     public function createDataImportExecutor(): DataImportExecutorInterface
     {
         return new DataImportExecutor(
@@ -55,9 +46,6 @@ class DataImportCommunicationFactory extends AbstractCommunicationFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Communication\Console\Executor\DataImportersDumpExecutorInterface
-     */
     public function createDataImporterDumpExecutor(): DataImportersDumpExecutorInterface
     {
         return new DataImportersDumpExecutor(
@@ -67,9 +55,6 @@ class DataImportCommunicationFactory extends AbstractCommunicationFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Dependency\Service\DataImportToUtilDataReaderServiceInterface
-     */
     public function getUtilDataReaderService(): DataImportToUtilDataReaderServiceInterface
     {
         return $this->getProvidedDependency(DataImportDependencyProvider::SERVICE_UTIL_DATA_READER);

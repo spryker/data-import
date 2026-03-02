@@ -21,9 +21,6 @@ class LocalizedAttributesExtractorStep implements DataImportStepInterface
      */
     protected $attributeNames;
 
-    /**
-     * @param array $attributeNames
-     */
     public function __construct(array $attributeNames)
     {
         $this->attributeNames = $attributeNames;

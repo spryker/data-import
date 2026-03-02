@@ -28,10 +28,6 @@ class DataImportConfigurationYamlParser implements DataImportConfigurationParser
      */
     protected $dataImportConfigurationMapper;
 
-    /**
-     * @param \Spryker\Zed\DataImport\Dependency\Service\DataImportToUtilDataReaderServiceInterface $utilDataReader
-     * @param \Spryker\Zed\DataImport\Communication\Console\Mapper\DataImportConfigurationMapperInterface $dataImportConfigurationMapper
-     */
     public function __construct(
         DataImportToUtilDataReaderServiceInterface $utilDataReader,
         DataImportConfigurationMapperInterface $dataImportConfigurationMapper
@@ -40,11 +36,6 @@ class DataImportConfigurationYamlParser implements DataImportConfigurationParser
         $this->dataImportConfigurationMapper = $dataImportConfigurationMapper;
     }
 
-    /**
-     * @param string $filename
-     *
-     * @return \Generated\Shared\Transfer\DataImportConfigurationTransfer
-     */
     public function parseConfigurationFile(string $filename): DataImportConfigurationTransfer
     {
         $yamlBatchIterator = $this->utilDataReader->getYamlBatchIterator($filename);
@@ -58,11 +49,6 @@ class DataImportConfigurationYamlParser implements DataImportConfigurationParser
         return $this->formatDataImportConfigurationTransfer($dataImportConfigurationTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImportConfigurationTransfer $dataImportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataImportConfigurationTransfer
-     */
     protected function formatDataImportConfigurationTransfer(DataImportConfigurationTransfer $dataImportConfigurationTransfer): DataImportConfigurationTransfer
     {
         foreach ($dataImportConfigurationTransfer->getActions() as $dataImportConfigurationActionTransfer) {
@@ -74,11 +60,6 @@ class DataImportConfigurationYamlParser implements DataImportConfigurationParser
         return $dataImportConfigurationTransfer;
     }
 
-    /**
-     * @param string $sourcePath
-     *
-     * @return string
-     */
     protected function resolveSourcePath(string $sourcePath): string
     {
         if (strpos($sourcePath, '/') === 0) {

@@ -114,11 +114,6 @@ class DataImportDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
         $container = parent::provideCommunicationLayerDependencies($container);
@@ -159,11 +154,6 @@ class DataImportDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addGracefulRunnerFacade(Container $container): Container
     {
         $container->set(static::FACADE_GRACEFUL_RUNNER, function (Container $container) {
@@ -191,11 +181,6 @@ class DataImportDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addDataImporterPlugins(Container $container): Container
     {
         $container->set(static::DATA_IMPORTER_PLUGINS, function () {
@@ -213,11 +198,6 @@ class DataImportDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addDataImportBeforeImportHookPlugins(Container $container): Container
     {
         $container->set(static::DATA_IMPORT_BEFORE_HOOK_PLUGINS, function () {
@@ -235,11 +215,6 @@ class DataImportDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addDataImportAfterImportHookPlugins(Container $container): Container
     {
         $container->set(static::DATA_IMPORT_AFTER_HOOK_PLUGINS, function () {
@@ -257,11 +232,6 @@ class DataImportDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addDataImportDefaultWriterPlugins(Container $container): Container
     {
         $container->set(static::DATA_IMPORT_DEFAULT_WRITER_PLUGINS, function () {
@@ -279,11 +249,6 @@ class DataImportDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addQueueClient(Container $container): Container
     {
         $container->set(static::CLIENT_QUEUE, function (Container $container) {
@@ -293,11 +258,6 @@ class DataImportDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUtilEncodingService(Container $container): Container
     {
         $container->set(static::SERVICE_UTIL_ENCODING, function (Container $container) {
@@ -307,11 +267,6 @@ class DataImportDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUtilDataReaderService(Container $container): Container
     {
         $container->set(static::SERVICE_UTIL_DATA_READER, function (Container $container) {
@@ -321,11 +276,6 @@ class DataImportDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addDataImportStoreFacade(Container $container): Container
     {
         $container->set(static::DATA_IMPORT_STORE_FACADE, function (Container $container) {
@@ -337,11 +287,6 @@ class DataImportDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addFlysystemService(Container $container): Container
     {
         $container->set(static::SERVICE_FLYSYSTEM, function (Container $container): DataImportToFlysystemServiceInterface {

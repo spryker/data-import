@@ -74,11 +74,6 @@ class DataImporterPublisher implements DataImporterPublisherInterface
         static::$importedEntityEvents = array_merge_recursive(static::$importedEntityEvents, $events);
     }
 
-    /**
-     * @param int|null $flushChunkSize
-     *
-     * @return void
-     */
     public static function triggerEvents(?int $flushChunkSize = null): void
     {
         $uniqueEvents = static::$importedEntityEvents;

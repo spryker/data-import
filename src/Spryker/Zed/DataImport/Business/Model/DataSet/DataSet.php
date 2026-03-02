@@ -88,9 +88,6 @@ class DataSet implements DataSetInterface
         $this->dataSet->offsetSet($offset, $value);
     }
 
-    /**
-     * @return string|null
-     */
     public function serialize(): ?string
     {
         return $this->dataSet->serialize();
@@ -106,9 +103,6 @@ class DataSet implements DataSetInterface
         $this->dataSet->unserialize($serialized);
     }
 
-    /**
-     * @return int
-     */
     public function count(): int
     {
         return $this->dataSet->count();

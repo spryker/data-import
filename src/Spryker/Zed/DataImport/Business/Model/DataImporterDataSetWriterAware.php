@@ -54,9 +54,6 @@ class DataImporterDataSetWriterAware extends DataImporter implements DataImporte
         return $dataImporterReportTransfer;
     }
 
-    /**
-     * @return void
-     */
     protected function flushDataSetWriter(): void
     {
         $this->dataSetWriter->flush();

@@ -30,10 +30,6 @@ class DataImportExecutor implements DataImportExecutorInterface
      */
     protected $dataImportFacade;
 
-    /**
-     * @param \Spryker\Zed\DataImport\Communication\Console\Parser\DataImportConfigurationParserInterface $dataImportConfigurationParser
-     * @param \Spryker\Zed\DataImport\Business\DataImportFacadeInterface $dataImportFacade
-     */
     public function __construct(DataImportConfigurationParserInterface $dataImportConfigurationParser, DataImportFacadeInterface $dataImportFacade)
     {
         $this->dataImportConfigurationParser = $dataImportConfigurationParser;
@@ -55,13 +51,6 @@ class DataImportExecutor implements DataImportExecutorInterface
         return $this->dataImportFacade->import($dataImporterConfigurationTransfer);
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param string $configPath
-     * @param string|null $importerType
-     *
-     * @return \Generated\Shared\Transfer\DataImporterReportTransfer
-     */
     public function executeByConfigAndImporterType(InputInterface $input, string $configPath, ?string $importerType): DataImporterReportTransfer
     {
         $dataImportConfigurationTransfer = $this->dataImportConfigurationParser->parseConfigurationFile($configPath);
@@ -99,12 +88,6 @@ class DataImportExecutor implements DataImportExecutorInterface
         return $overallDataImporterReportTransfer;
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param string|null $importerType
-     *
-     * @return \Generated\Shared\Transfer\DataImporterConfigurationTransfer
-     */
     protected function buildDataImportConfiguration(InputInterface $input, ?string $importerType): DataImporterConfigurationTransfer
     {
         $dataImporterConfigurationTransfer = new DataImporterConfigurationTransfer();
@@ -179,22 +162,11 @@ class DataImportExecutor implements DataImportExecutorInterface
         return new ArrayObject($filteredDataImportConfigurationActionTransfers);
     }
 
-    /**
-     * @param string|null $importerType
-     *
-     * @return bool
-     */
     protected function isImporterTypeSpecified(?string $importerType): bool
     {
         return $importerType && $importerType !== DataImportConsole::DEFAULT_IMPORTER_TYPE;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImporterReportTransfer $dataImporterReportTransfer
-     * @param \Generated\Shared\Transfer\DataImporterReportTransfer $overallDataImporterReportTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataImporterReportTransfer
-     */
     protected function addDataImporterReportTransferToOverallReport(
         DataImporterReportTransfer $dataImporterReportTransfer,
         DataImporterReportTransfer $overallDataImporterReportTransfer

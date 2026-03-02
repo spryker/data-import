@@ -56,11 +56,6 @@ class CsvReaderConfiguration implements CsvReaderConfigurationInterface
      */
     protected DataImportConfig $dataImportConfig;
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImporterReaderConfigurationTransfer $dataImporterReaderConfigurationTransfer
-     * @param \Spryker\Zed\DataImport\Business\Model\DataReader\FileResolver\FileResolverInterface $fileResolver
-     * @param \Spryker\Zed\DataImport\DataImportConfig $dataImportConfig
-     */
     public function __construct(
         DataImporterReaderConfigurationTransfer $dataImporterReaderConfigurationTransfer,
         FileResolverInterface $fileResolver,
@@ -87,9 +82,6 @@ class CsvReaderConfiguration implements CsvReaderConfigurationInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getFileName(): string
     {
         if ($this->dataImportConfig->isDataImportFromOtherSourceEnabled() === false) {
@@ -175,9 +167,6 @@ class CsvReaderConfiguration implements CsvReaderConfigurationInterface
         return (int)$this->dataImporterReaderConfigurationTransfer->getLimit();
     }
 
-    /**
-     * @return string
-     */
     public function getFileSystem(): string
     {
         return $this->dataImporterReaderConfigurationTransfer->getFileSystem() ?? static::DEFAULT_FILE_SYSTEM;

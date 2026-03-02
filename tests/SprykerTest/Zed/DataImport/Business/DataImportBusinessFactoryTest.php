@@ -26,9 +26,6 @@ use Spryker\Zed\DataImport\Business\Model\DataImporterInterface;
  */
 class DataImportBusinessFactoryTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testCsvDataImporterCanBeCreatedFromConfiguration(): void
     {
         $dataImporterReaderConfigurationTransfer = new DataImporterReaderConfigurationTransfer();

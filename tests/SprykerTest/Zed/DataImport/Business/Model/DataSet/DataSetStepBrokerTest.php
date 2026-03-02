@@ -25,9 +25,6 @@ use SprykerTest\Zed\DataImport\Helper\DataImportStepBeforeAndAfter;
  */
 class DataSetStepBrokerTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testExecutesDataImportSteps(): void
     {
         $dataSetStepBroker = $this->tester->getFactory()->createDataSetStepBroker();
@@ -36,9 +33,6 @@ class DataSetStepBrokerTest extends Unit
         $dataSetStepBroker->execute($this->tester->getFactory()->createDataSet());
     }
 
-    /**
-     * @return void
-     */
     public function testExecutesBeforeAndAfterDataImportSteps(): void
     {
         $dataSetStepBroker = $this->tester->getFactory()->createDataSetStepBroker();

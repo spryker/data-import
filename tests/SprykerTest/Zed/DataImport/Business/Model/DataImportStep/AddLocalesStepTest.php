@@ -43,17 +43,11 @@ class AddLocalesStepTest extends Unit
      */
     protected DataImportToStoreFacadeInterface|MockObject $storeFacadeMock;
 
-    /**
-     * @return void
-     */
     protected function _before(): void
     {
         $this->createAddLocalesStep();
     }
 
-    /**
-     * @return void
-     */
     public function testAddSameLanguageLocalesForDifferentStores(): void
     {
         // Arrange
@@ -90,9 +84,6 @@ class AddLocalesStepTest extends Unit
         $this->assertArrayHasKey('en_US', $dataSet[AddLocalesStep::KEY_LOCALES]);
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImportStep\AddLocalesStep
-     */
     protected function createAddLocalesStep(): AddLocalesStep
     {
         $this->storeFacadeMock = $this->mockStoreFacade();

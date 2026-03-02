@@ -14,25 +14,14 @@ use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 
 class DataImportStepBeforeAndAfter implements DataImportStepInterface, DataImportStepBeforeExecuteInterface, DataImportStepAfterExecuteInterface
 {
-    /**
-     * @return void
-     */
     public function beforeExecute(): void
     {
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
     }
 
-    /**
-     * @return void
-     */
     public function afterExecute(): void
     {
     }

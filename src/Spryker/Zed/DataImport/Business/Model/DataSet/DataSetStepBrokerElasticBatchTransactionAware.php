@@ -30,10 +30,6 @@ class DataSetStepBrokerElasticBatchTransactionAware extends DataSetStepBroker
      */
     protected $count = 0;
 
-    /**
-     * @param \Spryker\Zed\DataImport\Dependency\Propel\DataImportToPropelConnectionInterface $propelConnection
-     * @param \Spryker\Zed\DataImport\Business\Model\ElasticBatch\ElasticBatchInterface $memoryAllocatedElasticBatch
-     */
     public function __construct(
         DataImportToPropelConnectionInterface $propelConnection,
         ElasticBatchInterface $memoryAllocatedElasticBatch
@@ -64,9 +60,6 @@ class DataSetStepBrokerElasticBatchTransactionAware extends DataSetStepBroker
         $this->afterDataSetExecution();
     }
 
-    /**
-     * @return void
-     */
     protected function rollbackTransaction(): void
     {
         $this->propelConnection->rollBack();
@@ -101,9 +94,6 @@ class DataSetStepBrokerElasticBatchTransactionAware extends DataSetStepBroker
         }
     }
 
-    /**
-     * @return void
-     */
     protected function endTransaction(): void
     {
         $this->propelConnection->endTransaction();

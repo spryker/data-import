@@ -36,11 +36,6 @@ class FileResolver implements FileResolverInterface
         ));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImporterReaderConfigurationTransfer $dataImporterReaderConfigurationTransfer
-     *
-     * @return array
-     */
     protected function buildFileNames(DataImporterReaderConfigurationTransfer $dataImporterReaderConfigurationTransfer): array
     {
         $fileName = $dataImporterReaderConfigurationTransfer->getFileName();
@@ -54,11 +49,6 @@ class FileResolver implements FileResolverInterface
         return $fileNames;
     }
 
-    /**
-     * @param string $fileName
-     *
-     * @return bool
-     */
     protected function isValid(string $fileName): bool
     {
         return (is_file($fileName) && is_readable($fileName));

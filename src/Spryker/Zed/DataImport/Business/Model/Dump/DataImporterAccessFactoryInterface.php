@@ -12,11 +12,6 @@ use Spryker\Zed\DataImport\Business\Model\DataImporterInterface;
 
 interface DataImporterAccessFactoryInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer
-     *
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|null
-     */
     public function getDataImporterByType(
         DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer
     ): ?DataImporterInterface;

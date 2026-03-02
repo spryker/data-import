@@ -9,12 +9,6 @@ namespace Spryker\Zed\DataImport\Dependency\Service;
 
 interface DataImportToFlysystemServiceInterface
 {
-    /**
-     * @param string $filesystemName
-     * @param string $path
-     *
-     * @return bool
-     */
     public function has(string $filesystemName, string $path): bool;
 
     /**

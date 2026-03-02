@@ -29,9 +29,6 @@ class AddLocalesStep implements DataImportStepInterface
      */
     protected $storeFacade;
 
-    /**
-     * @param \Spryker\Zed\DataImport\Dependency\Facade\DataImportToStoreFacadeInterface $storeFacade
-     */
     public function __construct(DataImportToStoreFacadeInterface $storeFacade)
     {
         $this->storeFacade = $storeFacade;

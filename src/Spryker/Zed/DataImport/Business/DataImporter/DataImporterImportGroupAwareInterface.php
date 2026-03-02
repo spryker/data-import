@@ -9,15 +9,7 @@ namespace Spryker\Zed\DataImport\Business\DataImporter;
 
 interface DataImporterImportGroupAwareInterface
 {
-    /**
-     * @param string $importGroup
-     *
-     * @return void
-     */
     public function setImportGroup(string $importGroup): void;
 
-    /**
-     * @return string
-     */
     public function getImportGroup(): string;
 }

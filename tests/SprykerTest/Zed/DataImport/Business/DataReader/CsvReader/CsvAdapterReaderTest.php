@@ -38,9 +38,6 @@ class CsvAdapterReaderTest extends Unit
      */
     protected DataImportBusinessTester $tester;
 
-    /**
-     * @return void
-     */
     public function testDataReaderCanBeUsedAsIteratorAndReturnsArrayObject(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv');
@@ -49,27 +46,18 @@ class CsvAdapterReaderTest extends Unit
         }
     }
 
-    /**
-     * @return void
-     */
     public function testReaderIsCountable(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv');
         $this->assertInstanceOf(Countable::class, $csvReader);
     }
 
-    /**
-     * @return void
-     */
     public function testKeyReturnsCurrentDataSetPosition(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv');
         $this->assertIsInt($csvReader->key());
     }
 
-    /**
-     * @return void
-     */
     public function testThrowsExceptionWhenFileInvalid(): void
     {
         $this->expectException(DataReaderException::class);
@@ -78,9 +66,6 @@ class CsvAdapterReaderTest extends Unit
         $this->tester->getFactory()->createCsvReaderFromConfig($configuration);
     }
 
-    /**
-     * @return void
-     */
     public function testThrowsExceptionWhenHeaderAndDataSetLengthDoesNotMatch(): void
     {
         $this->expectException(DataSetWithHeaderCombineFailedException::class);
@@ -137,11 +122,6 @@ class CsvAdapterReaderTest extends Unit
         return $dataImportBusinessFactory->createCsvReaderFromConfig($configuration);
     }
 
-    /**
-     * @param string $fileName
-     *
-     * @return \Generated\Shared\Transfer\DataImporterReaderConfigurationTransfer
-     */
     protected function getCsvReaderConfigurationTransfer(
         string $fileName
     ): DataImporterReaderConfigurationTransfer {

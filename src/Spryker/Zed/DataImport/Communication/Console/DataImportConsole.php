@@ -151,9 +151,6 @@ class DataImportConsole extends Console
      */
     public const OPTION_CONFIG_SHORT = 'c';
 
-    /**
-     * @return void
-     */
     protected function configure(): void
     {
         $this->addArgument(static::ARGUMENT_IMPORTER, InputArgument::OPTIONAL, 'Defines which DataImport plugin should be executed. If not set, full import will be executed. Run data:import:dump to see all applied DataImporter.');
@@ -195,12 +192,6 @@ class DataImportConsole extends Console
         }
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (!$this->checkImportTypeAndGroupConfiguration($input)) {
@@ -220,13 +211,6 @@ class DataImportConsole extends Console
         return $this->executeByImportType($input, $importerType);
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param string|null $configPath
-     * @param string $importerType
-     *
-     * @return int
-     */
     protected function executeByConfigAndImporterType(InputInterface $input, ?string $configPath, string $importerType): int
     {
         $this->info(sprintf('<fg=white>Starting import with %s configuration file.</>', $configPath));
@@ -239,12 +223,6 @@ class DataImportConsole extends Console
         return $this->getExitCodeByDataImporterReportTransfer($dataImporterReportTransfer);
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param string $importerType
-     *
-     * @return int
-     */
     protected function executeByImportType(InputInterface $input, string $importerType): int
     {
         $this->warning(sprintf(
@@ -263,11 +241,6 @@ class DataImportConsole extends Console
         return $this->getExitCodeByDataImporterReportTransfer($dataImporterReportTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImporterReportTransfer $dataImporterReportTransfer
-     *
-     * @return void
-     */
     protected function printOverallDataImporterReport(DataImporterReportTransfer $dataImporterReportTransfer): void
     {
         $dataImporterReportMessageTransfers = $dataImporterReportTransfer->getMessages();
@@ -287,21 +260,11 @@ class DataImportConsole extends Console
         $this->info('<fg=white;options=bold>Overall Import status: </>' . $this->getImportStatusByDataImportReportStatus($dataImporterReportTransfer));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImporterReportTransfer $dataImporterReportTransfer
-     *
-     * @return int
-     */
     protected function getExitCodeByDataImporterReportTransfer(DataImporterReportTransfer $dataImporterReportTransfer): int
     {
         return $dataImporterReportTransfer->getIsSuccess() ? static::CODE_SUCCESS : static::CODE_ERROR;
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface|null $input
-     *
-     * @return string
-     */
     protected function getImporterType(?InputInterface $input = null): string
     {
         if ($input && $input->getArgument(static::ARGUMENT_IMPORTER)) {
@@ -319,11 +282,6 @@ class DataImportConsole extends Console
         return $importerType;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImporterReportTransfer $dataImportReportTransfer
-     *
-     * @return string
-     */
     protected function getImportStatusByDataImportReportStatus(DataImporterReportTransfer $dataImportReportTransfer): string
     {
         if ($dataImportReportTransfer->getIsSuccess()) {
@@ -395,11 +353,6 @@ class DataImportConsole extends Console
         return ($importType === null || $importType === static::DEFAULT_IMPORTER_TYPE) || $importGroup === DataImportConfig::IMPORT_GROUP_FULL;
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     *
-     * @return string|null
-     */
     protected function getYamlConfigPath(InputInterface $input): ?string
     {
         if ($input->hasParameterOption('--' . static::OPTION_CONFIG) || $input->hasParameterOption('-' . static::OPTION_CONFIG_SHORT)) {

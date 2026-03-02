@@ -16,9 +16,6 @@ class RenameDataSetKeysStep implements DataImportStepInterface
      */
     protected $keyMap;
 
-    /**
-     * @param array $keyMap
-     */
     public function __construct(array $keyMap)
     {
         $this->keyMap = $keyMap;

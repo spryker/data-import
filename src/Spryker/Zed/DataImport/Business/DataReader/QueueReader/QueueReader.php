@@ -39,11 +39,6 @@ class QueueReader implements DataReaderInterface
      */
     protected $queueReaderConfigurationTransfer;
 
-    /**
-     * @param \Spryker\Zed\DataImport\Dependency\Client\DataImportToQueueClientInterface $queueClient
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     * @param \Generated\Shared\Transfer\DataImporterQueueReaderConfigurationTransfer $queueReaderConfigurationTransfer
-     */
     public function __construct(
         DataImportToQueueClientInterface $queueClient,
         DataSetInterface $dataSet,
@@ -54,9 +49,6 @@ class QueueReader implements DataReaderInterface
         $this->queueReaderConfigurationTransfer = $queueReaderConfigurationTransfer;
     }
 
-    /**
-     * @return void
-     */
     public function next(): void
     {
         ++$this->position;
@@ -71,9 +63,6 @@ class QueueReader implements DataReaderInterface
         return $this->position;
     }
 
-    /**
-     * @return bool
-     */
     public function valid(): bool
     {
         if (!isset($this->messages[$this->position])) {
@@ -83,17 +72,11 @@ class QueueReader implements DataReaderInterface
         return isset($this->messages[$this->position]);
     }
 
-    /**
-     * @return void
-     */
     public function rewind(): void
     {
         $this->readFromQueue();
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface
-     */
     public function current(): DataSetInterface
     {
         $currentMessage = $this->messages[$this->position];
@@ -102,9 +85,6 @@ class QueueReader implements DataReaderInterface
         return $this->dataSet;
     }
 
-    /**
-     * @return void
-     */
     protected function readFromQueue(): void
     {
         $this->messages = [];
@@ -118,25 +98,16 @@ class QueueReader implements DataReaderInterface
         $this->messages = $newChunk;
     }
 
-    /**
-     * @return int|null
-     */
     protected function getChunkSize(): ?int
     {
         return $this->queueReaderConfigurationTransfer->getChunkSize();
     }
 
-    /**
-     * @return string|null
-     */
     protected function getQueueName(): ?string
     {
         return $this->queueReaderConfigurationTransfer->getQueueName();
     }
 
-    /**
-     * @return array
-     */
     protected function getQueueConsumerOptions(): array
     {
         return $this->queueReaderConfigurationTransfer->getQueueConsumerOptions();

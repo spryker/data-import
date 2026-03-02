@@ -28,11 +28,6 @@ class DataImportersDumpExecutor implements DataImportersDumpExecutorInterface
      */
     protected $dataImportConfig;
 
-    /**
-     * @param \Spryker\Zed\DataImport\Communication\Console\Parser\DataImportConfigurationParserInterface $dataImportConfigurationParser
-     * @param \Spryker\Zed\DataImport\Business\DataImportFacadeInterface $dataImportFacade
-     * @param \Spryker\Zed\DataImport\DataImportConfig $dataImportConfig
-     */
     public function __construct(
         DataImportConfigurationParserInterface $dataImportConfigurationParser,
         DataImportFacadeInterface $dataImportFacade,

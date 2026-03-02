@@ -89,11 +89,6 @@ class ImporterDumper implements ImporterDumperInterface
         return $availableImporters;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer
-     *
-     * @return string|null
-     */
     protected function getDataImporterClassNameByImporterType(
         DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer
     ): ?string {
@@ -102,11 +97,6 @@ class ImporterDumper implements ImporterDumperInterface
         return $importer ? get_class($importer) : null;
     }
 
-    /**
-     * @param string $importerType
-     *
-     * @return string|null
-     */
     protected function getImporterPluginClassNameByImporterType(string $importerType): ?string
     {
         foreach ($this->dataImporterPlugins as $dataImporterPlugin) {

@@ -28,9 +28,6 @@ use Spryker\Zed\DataImport\DataImportConfig;
  */
 class MemoryAllocatedElasticBatchTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testSumOfBatchesAndItemsAreCorrect(): void
     {
         //Arrange
@@ -87,12 +84,6 @@ class MemoryAllocatedElasticBatchTest extends Unit
         $this->assertEquals(6, $batches);
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\Memory\PhpSystemMemory $phpSystemMemoryMock
-     * @param \Spryker\Zed\DataImport\DataImportConfig $dataImportConfig
-     *
-     * @return \Spryker\Zed\DataImport\Business\Model\ElasticBatch\ElasticBatchInterface
-     */
     protected function createMemoryAllocatedElasticBatch(
         PhpSystemMemory $phpSystemMemoryMock,
         DataImportConfig $dataImportConfig

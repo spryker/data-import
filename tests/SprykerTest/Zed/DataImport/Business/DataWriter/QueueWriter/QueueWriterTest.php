@@ -61,9 +61,6 @@ class QueueWriterTest extends Unit
         );
     }
 
-    /**
-     * @return array
-     */
     public function getQueueWritableData(): array
     {
         return [
@@ -88,11 +85,6 @@ class QueueWriterTest extends Unit
         ];
     }
 
-    /**
-     * @param int $chunkSize
-     *
-     * @return \Spryker\Zed\DataImport\Business\DataWriter\QueueWriter\QueueWriterInterface
-     */
     protected function getQueueWriter(int $chunkSize): QueueWriterInterface
     {
         return new QueueWriter(
@@ -120,9 +112,6 @@ class QueueWriterTest extends Unit
         return $queueClientMock;
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Dependency\Service\DataImportToUtilEncodingServiceInterface
-     */
     protected function getUtilEncodingService(): DataImportToUtilEncodingServiceInterface
     {
         return new DataImportToUtilEncodingServiceBridge(

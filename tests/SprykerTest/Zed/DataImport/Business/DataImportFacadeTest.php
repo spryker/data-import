@@ -54,9 +54,6 @@ class DataImportFacadeTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testImportReturnsReport(): void
     {
         $dataImportFacade = $this->getFacade();
@@ -65,9 +62,6 @@ class DataImportFacadeTest extends Unit
         $this->assertInstanceOf(DataImporterReportTransfer::class, $dataImporterReportTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testImportReturnsReportWithFullImportAndNumberOfImportedDataSets(): void
     {
         $dataImportFacade = $this->getFacade();
@@ -77,9 +71,6 @@ class DataImportFacadeTest extends Unit
         $this->assertSame(0, $dataImporterReportTransfer->getImportedDataSetCount(), 'Expected that number of imported data sets is 0');
     }
 
-    /**
-     * @return void
-     */
     public function testImportReturnsReportWithSpecifiedImportType(): void
     {
         $dataImportFacade = $this->getFacade();
@@ -90,9 +81,6 @@ class DataImportFacadeTest extends Unit
         $this->assertSame(static::IMPORT_TYPE_FULL_IMPORT, $dataImporterReportTransfer->getImportType());
     }
 
-    /**
-     * @return void
-     */
     public function testImportExecutesFullImport(): void
     {
         $dataImportBusinessFactoryMock = $this->createDataImportBusinessFactoryMock();
@@ -102,9 +90,6 @@ class DataImportFacadeTest extends Unit
         $dataImportFacade->import();
     }
 
-    /**
-     * @return void
-     */
     public function testImportExecutesSpecificDataImporter(): void
     {
         $dataImportBusinessFactoryMock = $this->createDataImportBusinessFactoryMock();
@@ -117,9 +102,6 @@ class DataImportFacadeTest extends Unit
         $dataImportFacade->import($dataImporterConfigurationTransfer);
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\DataImportFacade
-     */
     private function getFacade(): DataImportFacade
     {
         return $this->tester->getFacade();
@@ -144,9 +126,6 @@ class DataImportFacadeTest extends Unit
         return $dataImportBusinessFactoryMock;
     }
 
-    /**
-     * @return void
-     */
     public function testDumpImporterDumpsAListOfAppliedImporter(): void
     {
         // Act
@@ -157,9 +136,6 @@ class DataImportFacadeTest extends Unit
         $this->assertEmpty($dumpedImporter);
     }
 
-    /**
-     * @return void
-     */
     public function testPublishShouldPublishRegularEvents(): void
     {
         // Arrange, Assert
@@ -180,9 +156,6 @@ class DataImportFacadeTest extends Unit
         $dataImportFacade->publish();
     }
 
-    /**
-     * @return void
-     */
     public function testPublishShouldPublishExtendedEvents(): void
     {
         // Arrange, Assert

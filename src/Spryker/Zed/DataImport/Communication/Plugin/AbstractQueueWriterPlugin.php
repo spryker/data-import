@@ -68,11 +68,6 @@ abstract class AbstractQueueWriterPlugin extends AbstractPlugin implements DataS
      */
     abstract protected function getChunkSize(): int;
 
-    /**
-     * @param \Generated\Shared\Transfer\DataSetItemTransfer $dataSetItemTransfer
-     *
-     * @return void
-     */
     protected function collectQueueSendMessage(DataSetItemTransfer $dataSetItemTransfer): void
     {
         static::$dataSetItemBuffer[] = $dataSetItemTransfer;

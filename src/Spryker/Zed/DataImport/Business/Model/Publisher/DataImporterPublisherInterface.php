@@ -29,10 +29,5 @@ interface DataImporterPublisherInterface
      */
     public static function addImportedEntityEvents(array $events);
 
-    /**
-     * @param int|null $flushChunkSize
-     *
-     * @return void
-     */
     public static function triggerEvents(?int $flushChunkSize = null): void;
 }

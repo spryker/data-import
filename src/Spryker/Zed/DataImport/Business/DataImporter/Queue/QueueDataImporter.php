@@ -41,13 +41,6 @@ class QueueDataImporter extends DataImporterDataSetWriterAware implements QueueD
      */
     protected $queueReceiveMessageBuffer;
 
-    /**
-     * @param string $importType
-     * @param \Spryker\Zed\DataImport\Business\Model\DataReader\DataReaderInterface $dataReader
-     * @param \Spryker\Zed\DataImport\Dependency\Client\DataImportToQueueClientInterface $queueClient
-     * @param \Spryker\Zed\DataImport\Business\DataImporter\Queue\QueueMessageHelperInterface $queueMessageHelper
-     * @param \Spryker\Zed\DataImport\Dependency\Facade\DataImportToGracefulRunnerInterface $gracefulRunnerFacade
-     */
     public function __construct(
         string $importType,
         DataReaderInterface $dataReader,
@@ -63,17 +56,11 @@ class QueueDataImporter extends DataImporterDataSetWriterAware implements QueueD
         $this->queueReceiveMessageBuffer = new SplQueue();
     }
 
-    /**
-     * @return string
-     */
     public function getImportGroup(): string
     {
         return $this->importGroup ?: DataImportConfig::IMPORT_GROUP_QUEUE_READERS;
     }
 
-    /**
-     * @return void
-     */
     protected function flushDataSetWriter(): void
     {
         try {
@@ -128,11 +115,6 @@ class QueueDataImporter extends DataImporterDataSetWriterAware implements QueueD
         return $dataImporterReportTransfer;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     protected function importDataSet(DataSetInterface $dataSet): void
     {
         $queueReceiveMessageTransfer = $this->getQueueReceiveMessageTransferFromDataSet($dataSet);
@@ -149,21 +131,11 @@ class QueueDataImporter extends DataImporterDataSetWriterAware implements QueueD
         $this->dataSetWriter->write($dataSet);
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Generated\Shared\Transfer\QueueReceiveMessageTransfer
-     */
     protected function getQueueReceiveMessageTransferFromDataSet(DataSetInterface $dataSet): QueueReceiveMessageTransfer
     {
         return (new QueueReceiveMessageTransfer())->fromArray($dataSet->getArrayCopy());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QueueReceiveMessageTransfer $queueReceiveMessageTransfer
-     *
-     * @return void
-     */
     protected function processQueueMessage(QueueReceiveMessageTransfer $queueReceiveMessageTransfer): void
     {
         if ($queueReceiveMessageTransfer->getAcknowledge()) {
@@ -181,11 +153,6 @@ class QueueDataImporter extends DataImporterDataSetWriterAware implements QueueD
         }
     }
 
-    /**
-     * @param \Throwable $exception
-     *
-     * @return string
-     */
     protected function buildErrorMessage(Throwable $exception): string
     {
         return sprintf(
@@ -195,19 +162,11 @@ class QueueDataImporter extends DataImporterDataSetWriterAware implements QueueD
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QueueReceiveMessageTransfer $queueReceiveMessageTransfer
-     *
-     * @return void
-     */
     protected function collectQueueReceiveMessage(QueueReceiveMessageTransfer $queueReceiveMessageTransfer): void
     {
         $this->queueReceiveMessageBuffer->enqueue($queueReceiveMessageTransfer);
     }
 
-    /**
-     * @return void
-     */
     protected function handleSuccessfulImport(): void
     {
         if (!$this->isDataSetWriterDataPersisted()) {
@@ -221,11 +180,6 @@ class QueueDataImporter extends DataImporterDataSetWriterAware implements QueueD
         }
     }
 
-    /**
-     * @param \Throwable $exception
-     *
-     * @return void
-     */
     protected function handleFailedImport(Throwable $exception): void
     {
         ErrorLogger::getInstance()->log($exception);
@@ -238,19 +192,11 @@ class QueueDataImporter extends DataImporterDataSetWriterAware implements QueueD
         }
     }
 
-    /**
-     * @return void
-     */
     protected function resetDataSetWriterPersistenceState(): void
     {
         $this->setDataSetWriterPersistenceState(true);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImporterReportTransfer $dataImporterReportTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataImporterReportTransfer
-     */
     protected function recalculateImportedDataSetCountAfterFailure(DataImporterReportTransfer $dataImporterReportTransfer): DataImporterReportTransfer
     {
         $dataImporterReportTransfer->setImportedDataSetCount(

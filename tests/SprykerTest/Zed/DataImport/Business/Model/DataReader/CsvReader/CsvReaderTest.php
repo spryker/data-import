@@ -46,9 +46,6 @@ class CsvReaderTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testDataReaderCanBeUsedAsIteratorAndReturnsArrayObject(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv');
@@ -57,36 +54,24 @@ class CsvReaderTest extends Unit
         }
     }
 
-    /**
-     * @return void
-     */
     public function testReaderIsCountable(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv');
         $this->assertInstanceOf(Countable::class, $csvReader);
     }
 
-    /**
-     * @return void
-     */
     public function testDataReaderCountWithColumnHeader(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv');
         $this->tester->assertDataSetCount(static::EXPECTED_NUMBER_OF_DATA_SETS_IN_CSV, $csvReader);
     }
 
-    /**
-     * @return void
-     */
     public function testDataReaderCountWithoutColumnHeader(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-without-header.csv', false);
         $this->tester->assertDataSetCount(static::EXPECTED_NUMBER_OF_DATA_SETS_IN_CSV, $csvReader);
     }
 
-    /**
-     * @return void
-     */
     public function testDataReaderCanBeConfiguredToUseNewFileAfterInstantiation(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-semicolon-delimiter.csv');
@@ -100,9 +85,6 @@ class CsvReaderTest extends Unit
         $this->tester->assertDataSetWithKeys(1, $currentRow);
     }
 
-    /**
-     * @return void
-     */
     public function testDataReaderCanBeConfiguredToUseNewFileAndCsvControlAfterInstantiation(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv');
@@ -121,9 +103,6 @@ class CsvReaderTest extends Unit
         $this->tester->assertDataSetWithKeys(1, $currentRow);
     }
 
-    /**
-     * @return void
-     */
     public function testDataReaderReturnSubsetOfTheDataSetsStartingAtGivenPositionWhenOffsetIsSet(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv', true, 2);
@@ -135,9 +114,6 @@ class CsvReaderTest extends Unit
         $this->assertTrue($csvReader->valid(), 'Expected that DataReaderInterface::valid() returns true because no limit was set and after received data set there is still one.');
     }
 
-    /**
-     * @return void
-     */
     public function testDataReaderReturnSubsetOfTheDataSetsWhenOffsetAndLimitIsSet(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv', true, 2, 1);
@@ -149,9 +125,6 @@ class CsvReaderTest extends Unit
         $this->assertFalse($csvReader->valid(), 'Expected that DataReaderInterface::valid() returns false because we limited the data set to one.');
     }
 
-    /**
-     * @return void
-     */
     public function testDataReaderReturnSubsetOfTheDataSetsWhenLimitIsSet(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv', true, null, 1);
@@ -163,9 +136,6 @@ class CsvReaderTest extends Unit
         $this->assertFalse($csvReader->valid(), 'Expected that DataReaderInterface::valid() returns false because we limited the data set to one.');
     }
 
-    /**
-     * @return void
-     */
     public function testEachDataSetShouldHaveCsvColumnNamesAsKeys(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv');
@@ -182,9 +152,6 @@ class CsvReaderTest extends Unit
         $this->tester->assertDataSetWithKeys(3, $thirdRow);
     }
 
-    /**
-     * @return void
-     */
     public function testEachDataSetShouldNotHaveCsvColumnNamesAsKeys(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-without-header.csv', false);
@@ -201,18 +168,12 @@ class CsvReaderTest extends Unit
         $this->tester->assertDataSetWithoutKeys(3, $thirdRow);
     }
 
-    /**
-     * @return void
-     */
     public function testKeyReturnsCurrentDataSetPosition(): void
     {
         $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv');
         $this->assertIsInt($csvReader->key());
     }
 
-    /**
-     * @return void
-     */
     public function testThrowsExceptionWhenFileInvalid(): void
     {
         $this->expectException(DataReaderException::class);
@@ -221,9 +182,6 @@ class CsvReaderTest extends Unit
         $this->tester->getFactory()->createCsvReaderFromConfig($configuration);
     }
 
-    /**
-     * @return void
-     */
     public function testThrowsExceptionWhenHeaderAndDataSetLengthDoesNotMatch(): void
     {
         $this->expectException(DataSetWithHeaderCombineFailedException::class);
@@ -248,14 +206,6 @@ class CsvReaderTest extends Unit
         return $csvReader;
     }
 
-    /**
-     * @param string $fileName
-     * @param bool $hasHeader
-     * @param int|null $offset
-     * @param int|null $limit
-     *
-     * @return \Generated\Shared\Transfer\DataImporterReaderConfigurationTransfer
-     */
     protected function getCsvReaderConfigurationTransfer(
         string $fileName,
         bool $hasHeader = true,

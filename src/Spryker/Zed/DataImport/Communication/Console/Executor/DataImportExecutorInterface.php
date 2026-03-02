@@ -22,12 +22,5 @@ interface DataImportExecutorInterface
      */
     public function executeByImporterType(InputInterface $input, string $importerType): DataImporterReportTransfer;
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param string $configPath
-     * @param string|null $importerType
-     *
-     * @return \Generated\Shared\Transfer\DataImporterReportTransfer
-     */
     public function executeByConfigAndImporterType(InputInterface $input, string $configPath, ?string $importerType): DataImporterReportTransfer;
 }

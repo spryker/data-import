@@ -37,9 +37,6 @@ class DataImporterTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testGetImporterTypeReturnsString(): void
     {
         $dataImporter = $this->getDataImporter();
@@ -47,9 +44,6 @@ class DataImporterTest extends Unit
         $this->assertSame(static::IMPORTER_TYPE, $dataImporter->getImportType());
     }
 
-    /**
-     * @return void
-     */
     public function testImportReturnsReport(): void
     {
         $dataImporter = $this->getDataImporter();
@@ -57,9 +51,6 @@ class DataImporterTest extends Unit
         $this->assertInstanceOf(DataImporterReportTransfer::class, $dataImporter->import());
     }
 
-    /**
-     * @return void
-     */
     public function testImportWithConfigurableDataReaderShouldReConfigureDataReader(): void
     {
         $dataImporter = $this->getDataImporter();
@@ -71,9 +62,6 @@ class DataImporterTest extends Unit
         $dataImporter->import($dataImporterConfigurationTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testImportExecutesDataSets(): void
     {
         $dataImporter = $this->getDataImporter();
@@ -82,9 +70,6 @@ class DataImporterTest extends Unit
         $dataImporter->import();
     }
 
-    /**
-     * @return void
-     */
     public function testImportExecutesBeforeImportHooks(): void
     {
         $dataImporter = $this->getDataImporter();
@@ -93,9 +78,6 @@ class DataImporterTest extends Unit
         $dataImporter->import();
     }
 
-    /**
-     * @return void
-     */
     public function testImportExecutesAfterImportHooks(): void
     {
         $dataImporter = $this->getDataImporter();
@@ -104,9 +86,6 @@ class DataImporterTest extends Unit
         $dataImporter->import();
     }
 
-    /**
-     * @return void
-     */
     public function testImportThrowsExceptionWhenThrowExceptionFlagSet(): void
     {
         $this->expectException(Exception::class);
@@ -121,9 +100,6 @@ class DataImporterTest extends Unit
         $dataImporter->import($dataImportConfigurationTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testImportLogsExceptionWhenThrowExceptionFlagNotSet(): void
     {
         $dataImporter = $this->getDataImporter();
@@ -136,9 +112,6 @@ class DataImporterTest extends Unit
         $dataImporter->import($dataImportConfigurationTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testImportReturnsReportWithMessagesWhenThrowExceptionFlagNotSet(): void
     {
         $dataImporter = $this->getDataImporter();

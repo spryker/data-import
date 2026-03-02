@@ -61,9 +61,6 @@ class DataImporterCollectionTest extends Unit
      */
     protected const DATA_IMPORTER_IMPORT_GROUP_QUEUE_WRITERS = 'QUEUE_WRITERS';
 
-    /**
-     * @return void
-     */
     public function testAddDataImporter(): void
     {
         $dataImporterCollection = $this->tester->getFactory()->createDataImporterCollection();
@@ -72,9 +69,6 @@ class DataImporterCollectionTest extends Unit
         $this->assertInstanceOf(DataImporterCollectionInterface::class, $fluentInterface);
     }
 
-    /**
-     * @return void
-     */
     public function testImportReturnsSuccessfulDataImportReportWhenAtLeastOneDataSetWasImported(): void
     {
         $dataImporterReportTransfer = new DataImporterReportTransfer();
@@ -89,9 +83,6 @@ class DataImporterCollectionTest extends Unit
         $this->assertTrue($dataImporterReportTransfer->getIsSuccess());
     }
 
-    /**
-     * @return void
-     */
     public function testImporterPluginCanBeAddedAfterSpecificDataImporter(): void
     {
         //Arrange
@@ -129,9 +120,6 @@ class DataImporterCollectionTest extends Unit
         $dataImportCollectionMock->import();
     }
 
-    /**
-     * @return void
-     */
     public function testImporterPluginWillAddedAtTheEndIfAddAfterIsNotMatchingToAnyAppliedImporter(): void
     {
         //Arrange
@@ -167,9 +155,6 @@ class DataImporterCollectionTest extends Unit
         $dataImportCollectionMock->import();
     }
 
-    /**
-     * @return void
-     */
     public function testAllImportersAreUsedWithFullGroupImport(): void
     {
         //Arrange
@@ -205,9 +190,6 @@ class DataImporterCollectionTest extends Unit
         $dataImportCollectionMock->import();
     }
 
-    /**
-     * @return void
-     */
     public function testImportersAreFilteredWithRespectToGroup(): void
     {
         $dataImportCollectionMock = $this->getDataImportCollectionMock();

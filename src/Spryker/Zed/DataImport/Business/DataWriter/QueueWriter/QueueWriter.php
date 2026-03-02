@@ -24,10 +24,6 @@ class QueueWriter implements QueueWriterInterface
      */
     protected $utilEncodingService;
 
-    /**
-     * @param \Spryker\Zed\DataImport\Dependency\Client\DataImportToQueueClientInterface $queueClient
-     * @param \Spryker\Zed\DataImport\Dependency\Service\DataImportToUtilEncodingServiceInterface $utilEncodingService
-     */
     public function __construct(
         DataImportToQueueClientInterface $queueClient,
         DataImportToUtilEncodingServiceInterface $utilEncodingService
@@ -75,11 +71,6 @@ class QueueWriter implements QueueWriterInterface
         return $queueSendMessageTransfers;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataSetItemTransfer $dataSetItemTransfer
-     *
-     * @return \Generated\Shared\Transfer\QueueSendMessageTransfer|null
-     */
     protected function mapDataSetItemTransferToQueueSendMessageTransfer(DataSetItemTransfer $dataSetItemTransfer): ?QueueSendMessageTransfer
     {
         if (!$dataSetItemTransfer->getPayload()) {

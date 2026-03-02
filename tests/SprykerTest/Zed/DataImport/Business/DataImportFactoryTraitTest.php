@@ -84,9 +84,6 @@ class DataImportFactoryTraitTest extends Unit
         $this->assertSame('some-entity', $dataImporterConfigurationTransfer->getImportType());
     }
 
-    /**
-     * @return void
-     */
     public function testBuildImporterConfigurationWithRealModule(): void
     {
         // Arrange
@@ -125,9 +122,6 @@ class DataImportFactoryTraitTest extends Unit
         $this->assertSame('product-label', $dataImporterConfigurationTransfer->getImportType());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCsvDataImporterFromConfigOnExistingModule(): void
     {
         // Arrange

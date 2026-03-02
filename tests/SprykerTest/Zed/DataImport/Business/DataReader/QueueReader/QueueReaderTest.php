@@ -53,9 +53,6 @@ class QueueReaderTest extends Unit
      */
     protected $queueMessagePosition = 0;
 
-    /**
-     * @return void
-     */
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
@@ -65,9 +62,6 @@ class QueueReaderTest extends Unit
         }
     }
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -79,9 +73,6 @@ class QueueReaderTest extends Unit
         $this->queueMessagePosition = 0;
     }
 
-    /**
-     * @return void
-     */
     public function testDataReaderCanBeUsedAsIteratorAndReturnsArrayObject(): void
     {
         $queueReader = $this->getQueueReader();
@@ -90,9 +81,6 @@ class QueueReaderTest extends Unit
         }
     }
 
-    /**
-     * @return void
-     */
     public function testKeyReturnsCurrentDataSetPosition(): void
     {
         $csvReader = $this->getQueueReader();
@@ -130,11 +118,6 @@ class QueueReaderTest extends Unit
         return $queueClientMock;
     }
 
-    /**
-     * @param int $chunkSize
-     *
-     * @return \Generated\Shared\Transfer\DataImporterQueueReaderConfigurationTransfer
-     */
     protected function getQueueReaderConfigurationTransfer(int $chunkSize): DataImporterQueueReaderConfigurationTransfer
     {
         return (new DataImporterQueueReaderConfigurationTransfer())

@@ -27,9 +27,6 @@ use Spryker\Zed\DataImport\Business\Model\DataReader\FileResolver\FileResolver;
  */
 class FileResolverTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testResolveFileThrowsExceptionWhenFileNotFound(): void
     {
         $this->expectException(FileResolverFileNotFoundException::class);
@@ -40,9 +37,6 @@ class FileResolverTest extends Unit
         $fileResolver->resolveFile($dataImporterReaderConfigurationTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testResolveFileReturnsFilePathIfFileNameIsFile(): void
     {
         $dataImporterReaderConfigurationTransfer = new DataImporterReaderConfigurationTransfer();
@@ -52,9 +46,6 @@ class FileResolverTest extends Unit
         $this->assertSame(__FILE__, $fileResolver->resolveFile($dataImporterReaderConfigurationTransfer));
     }
 
-    /**
-     * @return void
-     */
     public function testResolveFileReturnsFilePathIfFileNameFoundInOneDirectory(): void
     {
         $dataImporterReaderConfigurationTransfer = new DataImporterReaderConfigurationTransfer();

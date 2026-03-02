@@ -58,8 +58,5 @@ interface CsvReaderConfigurationInterface
      */
     public function getLimit();
 
-    /**
-     * @return string
-     */
     public function getFileSystem(): string;
 }

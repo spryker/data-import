@@ -78,19 +78,11 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
         );
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\DataImporter\DataImporterCollectionCollectorInterface
-     */
     public function createDataImporterCollectionCollector(): DataImporterCollectionCollectorInterface
     {
         return new DataImporterCollectionCollector($this->getDataImporterPlugins());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer
-     *
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|null
-     */
     public function getDataImporterByType(
         DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer
     ): ?DataImporterInterface {
@@ -195,19 +187,11 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
         return new DataImporter($importType, $reader, $this->getGracefulRunnerFacade(), $this->getConfig());
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Dependency\Facade\DataImportToGracefulRunnerInterface
-     */
     public function getGracefulRunnerFacade(): DataImportToGracefulRunnerInterface
     {
         return $this->getProvidedDependency(DataImportDependencyProvider::FACADE_GRACEFUL_RUNNER);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QueueDataImporterConfigurationTransfer $queueDataImporterConfigurationTransfer
-     *
-     * @return \Spryker\Zed\DataImport\Business\DataImporter\Queue\QueueDataImporterInterface
-     */
     public function createQueueDataImporter(QueueDataImporterConfigurationTransfer $queueDataImporterConfigurationTransfer): QueueDataImporterInterface
     {
         $dataReader = $this->createQueueReaderFromConfig(
@@ -224,9 +208,6 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
         );
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\DataImporter\Queue\QueueMessageHelperInterface
-     */
     public function createQueueMessageHelper(): QueueMessageHelperInterface
     {
         return new QueueMessageHelper($this->getUtilEncodingService());
@@ -291,9 +272,6 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
         return $this->createCsvAdapterReader($csvReaderConfiguration);
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataReader\FileResolver\FileResolverInterface
-     */
     public function createFileResolver(): FileResolverInterface
     {
         return new FileResolver();
@@ -360,9 +338,6 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
         );
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\ElasticBatch\ElasticBatchInterface
-     */
     public function createMemoryAllocatedElasticBatch(): ElasticBatchInterface
     {
         return new MemoryAllocatedElasticBatch(
@@ -371,9 +346,6 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
         );
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\Memory\SystemMemoryInterface
-     */
     public function createMemoryModel(): SystemMemoryInterface
     {
         return new PhpSystemMemory();
@@ -401,9 +373,6 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
         return new RenameDataSetKeysStep($map);
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\Dump\ImporterDumperInterface
-     */
     public function createImportDumper(): ImporterDumperInterface
     {
         /** @var \Spryker\Zed\DataImport\Business\Model\DataImporterCollectionInterface $importer */
@@ -416,9 +385,6 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
         );
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\DataWriter\QueueWriter\QueueWriterInterface
-     */
     public function createQueueWriter(): QueueWriterInterface
     {
         return new QueueWriter(
@@ -441,9 +407,6 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
         );
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Dependency\Client\DataImportToQueueClientInterface
-     */
     public function getQueueClient(): DataImportToQueueClientInterface
     {
         return $this->getProvidedDependency(DataImportDependencyProvider::CLIENT_QUEUE);
@@ -481,9 +444,6 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
         return new AddLocalesStep($this->getDataImportStoreFacade());
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface
-     */
     protected function createAddStoresStep(): DataImportStepInterface
     {
         return new AddStoresStep($this->getDataImportStoreFacade());
@@ -499,17 +459,11 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
         return new LocalizedAttributesExtractorStep($defaultAttributes);
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Dependency\Facade\DataImportToStoreFacadeInterface
-     */
     public function getDataImportStoreFacade(): DataImportToStoreFacadeInterface
     {
         return $this->getProvidedDependency(DataImportDependencyProvider::DATA_IMPORT_STORE_FACADE);
     }
 
-    /**
-     * @return \Spryker\Zed\DataImport\Dependency\Service\DataImportToFlysystemServiceInterface
-     */
     protected function getFlysystemService(): DataImportToFlysystemServiceInterface
     {
         return $this->getProvidedDependency(DataImportDependencyProvider::SERVICE_FLYSYSTEM);

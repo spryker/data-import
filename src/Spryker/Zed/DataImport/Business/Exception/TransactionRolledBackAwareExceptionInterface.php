@@ -9,8 +9,5 @@ namespace Spryker\Zed\DataImport\Business\Exception;
 
 interface TransactionRolledBackAwareExceptionInterface
 {
-    /**
-     * @return int
-     */
     public function getRolledBackRowsCount(): int;
 }

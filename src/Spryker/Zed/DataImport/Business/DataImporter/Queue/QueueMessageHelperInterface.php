@@ -18,18 +18,7 @@ interface QueueMessageHelperInterface
      */
     public function getDecodedMessageBody(QueueReceiveMessageTransfer $queueReceiveMessageTransfer);
 
-    /**
-     * @param \Generated\Shared\Transfer\QueueReceiveMessageTransfer $queueReceiveMessageTransfer
-     *
-     * @return \Generated\Shared\Transfer\QueueReceiveMessageTransfer
-     */
     public function handleSuccessMessage(QueueReceiveMessageTransfer $queueReceiveMessageTransfer): QueueReceiveMessageTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\QueueReceiveMessageTransfer $queueReceiveMessageTransfer
-     * @param string $errorMessage
-     *
-     * @return \Generated\Shared\Transfer\QueueReceiveMessageTransfer
-     */
     public function handleFailedMessage(QueueReceiveMessageTransfer $queueReceiveMessageTransfer, string $errorMessage): QueueReceiveMessageTransfer;
 }

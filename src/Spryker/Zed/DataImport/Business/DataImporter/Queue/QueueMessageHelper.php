@@ -27,9 +27,6 @@ class QueueMessageHelper implements QueueMessageHelperInterface
      */
     protected $utilEncodingService;
 
-    /**
-     * @param \Spryker\Zed\DataImport\Dependency\Service\DataImportToUtilEncodingServiceInterface $utilEncodingService
-     */
     public function __construct(DataImportToUtilEncodingServiceInterface $utilEncodingService)
     {
         $this->utilEncodingService = $utilEncodingService;
@@ -45,22 +42,11 @@ class QueueMessageHelper implements QueueMessageHelperInterface
         return $this->utilEncodingService->decodeJson($queueReceiveMessageTransfer->getQueueMessage()->getBody(), true);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QueueReceiveMessageTransfer $queueReceiveMessageTransfer
-     *
-     * @return \Generated\Shared\Transfer\QueueReceiveMessageTransfer
-     */
     public function handleSuccessMessage(QueueReceiveMessageTransfer $queueReceiveMessageTransfer): QueueReceiveMessageTransfer
     {
         return $queueReceiveMessageTransfer->setAcknowledge(true);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QueueReceiveMessageTransfer $queueReceiveMessageTransfer
-     * @param string $errorMessage
-     *
-     * @return \Generated\Shared\Transfer\QueueReceiveMessageTransfer
-     */
     public function handleFailedMessage(QueueReceiveMessageTransfer $queueReceiveMessageTransfer, string $errorMessage): QueueReceiveMessageTransfer
     {
         $queueReceiveMessageTransfer = $this->addErrorMessageToQueueReceiveMessageBody($queueReceiveMessageTransfer, $errorMessage);
@@ -72,12 +58,6 @@ class QueueMessageHelper implements QueueMessageHelperInterface
         return $queueReceiveMessageTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QueueReceiveMessageTransfer $queueReceiveMessageTransfer
-     * @param string $message
-     *
-     * @return \Generated\Shared\Transfer\QueueReceiveMessageTransfer
-     */
     protected function addErrorMessageToQueueReceiveMessageBody(
         QueueReceiveMessageTransfer $queueReceiveMessageTransfer,
         string $message

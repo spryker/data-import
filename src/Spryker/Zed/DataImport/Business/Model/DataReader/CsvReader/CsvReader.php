@@ -53,10 +53,6 @@ class CsvReader implements DataReaderInterface, ConfigurableDataReaderInterface,
      */
     protected $limit;
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataReader\CsvReader\CsvReaderConfigurationInterface $csvReaderConfiguration
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     */
     public function __construct(CsvReaderConfigurationInterface $csvReaderConfiguration, DataSetInterface $dataSet)
     {
         $this->csvReaderConfiguration = $csvReaderConfiguration;
@@ -202,25 +198,16 @@ class CsvReader implements DataReaderInterface, ConfigurableDataReaderInterface,
         return $this->dataSet;
     }
 
-    /**
-     * @return void
-     */
     public function next(): void
     {
         $this->fileObject->next();
     }
 
-    /**
-     * @return int
-     */
     public function key(): int
     {
         return $this->fileObject->key();
     }
 
-    /**
-     * @return bool
-     */
     public function valid(): bool
     {
         if ($this->limit !== null && $this->limit !== 0) {
@@ -232,9 +219,6 @@ class CsvReader implements DataReaderInterface, ConfigurableDataReaderInterface,
         return $this->fileObject->valid();
     }
 
-    /**
-     * @return void
-     */
     public function rewind(): void
     {
         $this->fileObject->rewind();
