@@ -59,7 +59,7 @@ class CsvAdapterReader implements DataReaderInterface, ConfigurableDataReaderInt
     protected ?int $limit;
 
     /**
-     * @var int
+     * @var int<0, max> Non-negative counter of rows (phpstan annotation)
      */
     protected int $count = 0;
 
@@ -161,6 +161,9 @@ class CsvAdapterReader implements DataReaderInterface, ConfigurableDataReaderInt
         return $this->getRow();
     }
 
+    /**
+     * @return int<0, max>
+     */
     public function count(): int
     {
         if (!$this->count) {
