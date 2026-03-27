@@ -34,9 +34,11 @@ use Spryker\Zed\DataImport\Business\Model\DataImportStep\RenameDataSetKeysStep;
 use Spryker\Zed\DataImport\Business\Model\DataReader\CsvReader\CsvReader;
 use Spryker\Zed\DataImport\Business\Model\DataReader\CsvReader\CsvReaderConfiguration;
 use Spryker\Zed\DataImport\Business\Model\DataReader\CsvReader\CsvReaderConfigurationInterface;
+use Spryker\Zed\DataImport\Business\Model\DataReader\DataReaderDecoratorInterface;
 use Spryker\Zed\DataImport\Business\Model\DataReader\DataReaderInterface;
 use Spryker\Zed\DataImport\Business\Model\DataReader\FileResolver\FileResolver;
 use Spryker\Zed\DataImport\Business\Model\DataReader\FileResolver\FileResolverInterface;
+use Spryker\Zed\DataImport\Business\Model\DataReader\ProgressDataReaderDecorator;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSet;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBroker;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerElasticBatchTransactionAware;
@@ -49,6 +51,8 @@ use Spryker\Zed\DataImport\Business\Model\ElasticBatch\MemoryAllocatedElasticBat
 use Spryker\Zed\DataImport\Business\Model\Memory\PhpSystemMemory;
 use Spryker\Zed\DataImport\Business\Model\Memory\SystemMemoryInterface;
 use Spryker\Zed\DataImport\Business\Model\Publisher\DataImporterPublisher;
+use Spryker\Zed\DataImport\Communication\Console\ProgressBar\ProgressBarHelper;
+use Spryker\Zed\DataImport\Communication\Console\ProgressBar\ProgressBarHelperInterface;
 use Spryker\Zed\DataImport\DataImportDependencyProvider;
 use Spryker\Zed\DataImport\Dependency\Client\DataImportToQueueClientInterface;
 use Spryker\Zed\DataImport\Dependency\Facade\DataImportToEventFacadeInterface;
@@ -266,10 +270,19 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
         );
 
         if ($this->getConfig()->isDataImportFromOtherSourceEnabled() === false) {
-            return $this->createCsvReader($csvReaderConfiguration);
+            $dataReader = $this->createCsvReader($csvReaderConfiguration);
+        } else {
+            $dataReader = $this->createCsvAdapterReader($csvReaderConfiguration);
         }
 
-        return $this->createCsvAdapterReader($csvReaderConfiguration);
+        $progressReaderDecorator = $this->createProgressReaderDecorator();
+        if ($progressReaderDecorator->getOutput() !== null) {
+            $progressReaderDecorator->setInnerReader($dataReader);
+
+            return $progressReaderDecorator;
+        }
+
+        return $dataReader;
     }
 
     public function createFileResolver(): FileResolverInterface
@@ -467,5 +480,17 @@ class DataImportBusinessFactory extends AbstractBusinessFactory implements DataI
     protected function getFlysystemService(): DataImportToFlysystemServiceInterface
     {
         return $this->getProvidedDependency(DataImportDependencyProvider::SERVICE_FLYSYSTEM);
+    }
+
+    public function createProgressReaderDecorator(): DataReaderDecoratorInterface
+    {
+        return new ProgressDataReaderDecorator(
+            $this->createProgressBarHelper(),
+        );
+    }
+
+    public function createProgressBarHelper(): ProgressBarHelperInterface
+    {
+        return new ProgressBarHelper();
     }
 }

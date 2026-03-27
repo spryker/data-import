@@ -151,6 +151,10 @@ class DataImportConsole extends Console
      */
     public const OPTION_CONFIG_SHORT = 'c';
 
+    public const string OPTION_PROGRESS_BAR = 'progress-bar';
+
+    public const string OPTION_PROGRESS_BAR_SHORT = 'pb';
+
     protected function configure(): void
     {
         $this->addArgument(static::ARGUMENT_IMPORTER, InputArgument::OPTIONAL, 'Defines which DataImport plugin should be executed. If not set, full import will be executed. Run data:import:dump to see all applied DataImporter.');
@@ -166,6 +170,7 @@ class DataImportConsole extends Console
         $this->addOption(static::OPTION_CSV_HAS_HEADER, static::OPTION_CSV_HAS_HEADER_SHORT, InputOption::VALUE_REQUIRED, 'Set this option to 0 (zero) to disable that the first row of the csv file is a used as keys for the data sets.', true);
         $this->addOption(static::OPTION_IMPORT_GROUP, static::OPTION_IMPORT_GROUP_SHORT, InputOption::VALUE_REQUIRED, 'Defines the import group. Import group determines a specific subset of data importers to be used.', DataImportConfig::IMPORT_GROUP_FULL);
         $this->addOption(static::OPTION_CONFIG, static::OPTION_CONFIG_SHORT, InputOption::VALUE_REQUIRED, 'Defines the relative path of the data import configuration .yml file.');
+        $this->addOption(static::OPTION_PROGRESS_BAR, static::OPTION_PROGRESS_BAR_SHORT, InputOption::VALUE_NONE, 'Show a real-time progress bar during import.');
 
         if ($this->isAddedAsNamedDataImportCommand()) {
             $importerType = $this->getImporterType();
@@ -194,6 +199,9 @@ class DataImportConsole extends Console
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        if ($this->isProgressbarEnabled($input)) {
+            $this->getFactory()->createProgressBarHelper()->setOutput($output);
+        }
         if (!$this->checkImportTypeAndGroupConfiguration($input)) {
             $this->error(
                 sprintf('No import group (except "%s") can be used when an import type is specified', DataImportConfig::IMPORT_GROUP_FULL),
@@ -361,5 +369,10 @@ class DataImportConsole extends Console
         }
 
         return $this->getConfig()->getDefaultYamlConfigPath();
+    }
+
+    protected function isProgressbarEnabled(InputInterface $input): bool
+    {
+        return (bool)$input->getOption(static::OPTION_PROGRESS_BAR);
     }
 }

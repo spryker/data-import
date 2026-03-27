@@ -15,6 +15,8 @@ use Spryker\Zed\DataImport\Communication\Console\Mapper\DataImportConfigurationM
 use Spryker\Zed\DataImport\Communication\Console\Mapper\DataImportConfigurationMapperInterface;
 use Spryker\Zed\DataImport\Communication\Console\Parser\DataImportConfigurationParserInterface;
 use Spryker\Zed\DataImport\Communication\Console\Parser\DataImportConfigurationYamlParser;
+use Spryker\Zed\DataImport\Communication\Console\ProgressBar\ProgressBarHelper;
+use Spryker\Zed\DataImport\Communication\Console\ProgressBar\ProgressBarHelperInterface;
 use Spryker\Zed\DataImport\DataImportDependencyProvider;
 use Spryker\Zed\DataImport\Dependency\Service\DataImportToUtilDataReaderServiceInterface;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
@@ -58,5 +60,10 @@ class DataImportCommunicationFactory extends AbstractCommunicationFactory
     public function getUtilDataReaderService(): DataImportToUtilDataReaderServiceInterface
     {
         return $this->getProvidedDependency(DataImportDependencyProvider::SERVICE_UTIL_DATA_READER);
+    }
+
+    public function createProgressBarHelper(): ProgressBarHelperInterface
+    {
+        return new ProgressBarHelper();
     }
 }
