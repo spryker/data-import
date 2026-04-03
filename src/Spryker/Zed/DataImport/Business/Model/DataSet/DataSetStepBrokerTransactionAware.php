@@ -7,6 +7,7 @@
 
 namespace Spryker\Zed\DataImport\Business\Model\DataSet;
 
+use Propel\Runtime\Propel;
 use Spryker\Zed\DataImport\Business\Exception\DataSetBrokerTransactionFailedException;
 use Spryker\Zed\DataImport\Business\Exception\TransactionException;
 use Spryker\Zed\DataImport\Dependency\Propel\DataImportToPropelConnectionInterface;
@@ -14,6 +15,8 @@ use Throwable;
 
 class DataSetStepBrokerTransactionAware extends DataSetStepBroker
 {
+    protected const int MEMORY_CLEAR_THRESHOLD = 1000;
+
     /**
      * @var \Spryker\Zed\DataImport\Dependency\Propel\DataImportToPropelConnectionInterface
      */
@@ -98,6 +101,26 @@ class DataSetStepBrokerTransactionAware extends DataSetStepBroker
         if (!$this->bulkSize || $this->bulkSize === $this->count) {
             $this->propelConnection->endTransaction();
             $this->count = 0;
+            $this->clearMemory();
+        }
+
+        if ($this->count % static::MEMORY_CLEAR_THRESHOLD === 0) {
+            $this->clearMemory();
+        }
+    }
+
+    protected function clearMemory(): void
+    {
+        $this->clearPropelInstancePools();
+        gc_collect_cycles();
+    }
+
+    protected function clearPropelInstancePools(): void
+    {
+        foreach (Propel::getDatabaseMap()->getTables() as $tableMap) {
+            if (method_exists($tableMap, 'clearInstancePool')) {
+                $tableMap::clearInstancePool(); //@phpstan-ignore-line
+            }
         }
     }
 
