@@ -59,7 +59,7 @@ class DataSetStepBrokerTransactionAware extends DataSetStepBroker
             $rolledBackRowsCount = $this->count;
             $this->rollbackTransaction();
 
-            throw new DataSetBrokerTransactionFailedException($rolledBackRowsCount, $exception->getMessage(), $exception->getCode(), $exception);
+            throw new DataSetBrokerTransactionFailedException($rolledBackRowsCount, $exception->getMessage(), (int)$exception->getCode(), $exception);
         }
 
         $this->afterDataSetExecution();
