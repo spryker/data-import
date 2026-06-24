@@ -18,21 +18,29 @@ use Spryker\Zed\Kernel\AbstractBundleConfig;
 class DataImportConfig extends AbstractBundleConfig
 {
     /**
+     * @api
+     *
      * @var string
      */
     public const IMPORT_GROUP_FULL = 'FULL';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const IMPORT_GROUP_QUEUE_READERS = 'QUEUE_READERS';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const IMPORT_GROUP_QUEUE_WRITERS = 'QUEUE_WRITERS';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const ZED_DB_ENGINE = 'ZED_DB_ENGINE';
