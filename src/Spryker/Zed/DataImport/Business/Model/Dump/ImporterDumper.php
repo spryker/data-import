@@ -115,7 +115,6 @@ class ImporterDumper implements ImporterDumperInterface
     {
         $reflection = new ReflectionClass($this->dataImporterCollection);
         $dataImporterProperty = $reflection->getProperty('dataImporter');
-        $dataImporterProperty->setAccessible(true);
 
         return $dataImporterProperty->getValue($this->dataImporterCollection);
     }

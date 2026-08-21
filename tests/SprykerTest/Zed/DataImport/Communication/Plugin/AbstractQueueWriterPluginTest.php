@@ -135,7 +135,6 @@ class AbstractQueueWriterPluginTest extends Unit
     protected function resetAbstractQueueDataWriterPluginBuffer(): void
     {
         $reflection = new ReflectionProperty(AbstractQueueWriterPlugin::class, 'dataSetItemBuffer');
-        $reflection->setAccessible(true);
         $reflection->setValue(null, []);
     }
 }

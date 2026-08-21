@@ -54,7 +54,6 @@ class DataImportFactoryTraitTest extends Unit
         // Use reflection to access the private method
         $reflection = new ReflectionClass($this);
         $method = $reflection->getMethod('buildImporterConfiguration');
-        $method->setAccessible(true);
 
         // Act
         $dataImporterConfigurationTransfer = $method->invoke($this, $dataImporterDataSourceConfigurationTransfer);
@@ -95,7 +94,6 @@ class DataImportFactoryTraitTest extends Unit
         // Use reflection to access the private method
         $reflection = new ReflectionClass($this);
         $method = $reflection->getMethod('buildImporterConfiguration');
-        $method->setAccessible(true);
 
         // Act
         $dataImporterConfigurationTransfer = $method->invoke($this, $dataImporterDataSourceConfigurationTransfer);
