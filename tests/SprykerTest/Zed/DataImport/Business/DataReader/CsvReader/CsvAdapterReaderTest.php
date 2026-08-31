@@ -33,14 +33,19 @@ use SprykerTest\Zed\DataImport\DataImportBusinessTester;
  */
 class CsvAdapterReaderTest extends Unit
 {
-    /**
-     * @var \SprykerTest\Zed\DataImport\DataImportBusinessTester
-     */
+    protected const int EXPECTED_STANDARD_IMPORT_DATA_SET_COUNT = 3;
+
+    protected const string FILE_NAME_STANDARD_IMPORT = 'import-standard.csv';
+
+    protected const string FILE_NAME_NOT_EXISTING = 'not-existing.csv';
+
+    protected const string FILE_NAME_HEADER_DATA_SET_LENGTH_MISSMATCH = 'import-header-dataset-length-missmatch.csv';
+
     protected DataImportBusinessTester $tester;
 
     public function testDataReaderCanBeUsedAsIteratorAndReturnsArrayObject(): void
     {
-        $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv');
+        $csvReader = $this->getCsvReader(Configuration::dataDir() . static::FILE_NAME_STANDARD_IMPORT);
         foreach ($csvReader as $dataSet) {
             $this->assertInstanceOf(DataSet::class, $dataSet);
         }
@@ -48,28 +53,37 @@ class CsvAdapterReaderTest extends Unit
 
     public function testReaderIsCountable(): void
     {
-        $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv');
+        $csvReader = $this->getCsvReader(Configuration::dataDir() . static::FILE_NAME_STANDARD_IMPORT);
         $this->assertInstanceOf(Countable::class, $csvReader);
     }
 
     public function testKeyReturnsCurrentDataSetPosition(): void
     {
-        $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-standard.csv');
+        $csvReader = $this->getCsvReader(Configuration::dataDir() . static::FILE_NAME_STANDARD_IMPORT);
         $this->assertIsInt($csvReader->key());
     }
 
     public function testThrowsExceptionWhenFileInvalid(): void
     {
         $this->expectException(DataReaderException::class);
-        $configuration = $this->getCsvReaderConfigurationTransfer(Configuration::dataDir() . 'not-existing.csv');
 
-        $this->tester->getFactory()->createCsvReaderFromConfig($configuration);
+        $this->getCsvReader(Configuration::dataDir() . static::FILE_NAME_NOT_EXISTING);
+    }
+
+    public function testReadsSourcePathRelativeToFileSystemRoot(): void
+    {
+        $applicationRootPath = rtrim(APPLICATION_ROOT_DIR, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        $fileName = substr(Configuration::dataDir() . static::FILE_NAME_STANDARD_IMPORT, strlen($applicationRootPath));
+
+        $csvReader = $this->getCsvReader($fileName, $applicationRootPath);
+
+        $this->assertSame(static::EXPECTED_STANDARD_IMPORT_DATA_SET_COUNT, $csvReader->count());
     }
 
     public function testThrowsExceptionWhenHeaderAndDataSetLengthDoesNotMatch(): void
     {
         $this->expectException(DataSetWithHeaderCombineFailedException::class);
-        $csvReader = $this->getCsvReader(Configuration::dataDir() . 'import-header-dataset-length-missmatch.csv');
+        $csvReader = $this->getCsvReader(Configuration::dataDir() . static::FILE_NAME_HEADER_DATA_SET_LENGTH_MISSMATCH);
 
         $csvReader->current();
     }
@@ -90,19 +104,21 @@ class CsvAdapterReaderTest extends Unit
     }
 
     /**
-     * @param string $fileName
-     *
      * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\DataImport\Dependency\Service\DataImportToFlysystemServiceInterface
      */
-    protected function getFlysystemMock(string $fileName): DataImportToFlysystemServiceInterface
+    protected function getFlysystemMock(string $fileSystemRootPath = ''): DataImportToFlysystemServiceInterface
     {
         $flysystemServiceMock = $this->getMockBuilder(DataImportToFlysystemServiceInterface::class)->getMock();
         $flysystemServiceMock->expects($this->any())
             ->method('has')
-            ->willReturn(true);
+            ->willReturnCallback(static function (string $filesystemName, string $path) use ($fileSystemRootPath): bool {
+                return is_file($fileSystemRootPath . $path);
+            });
         $flysystemServiceMock->expects($this->any())
             ->method('readStream')
-            ->willReturn(fopen($fileName, 'rb'));
+            ->willReturnCallback(static function (string $filesystemName, string $path) use ($fileSystemRootPath) {
+                return fopen($fileSystemRootPath . $path, 'rb');
+            });
 
         return $flysystemServiceMock;
     }
@@ -112,11 +128,11 @@ class CsvAdapterReaderTest extends Unit
      *
      * @return \Spryker\Zed\DataImport\Business\Model\DataReader\DataReaderInterface|\Spryker\Zed\DataImport\Business\Model\DataReader\ConfigurableDataReaderInterface
      */
-    protected function getCsvReader(string $fileName)
+    protected function getCsvReader(string $fileName, string $fileSystemRootPath = '')
     {
         $configuration = $this->getCsvReaderConfigurationTransfer($fileName);
 
-        $this->tester->setDependency(DataImportDependencyProvider::SERVICE_FLYSYSTEM, $this->getFlysystemMock($fileName));
+        $this->tester->setDependency(DataImportDependencyProvider::SERVICE_FLYSYSTEM, $this->getFlysystemMock($fileSystemRootPath));
         $dataImportBusinessFactory = $this->tester->getFactory()->setConfig($this->getConfigMock());
 
         return $dataImportBusinessFactory->createCsvReaderFromConfig($configuration);

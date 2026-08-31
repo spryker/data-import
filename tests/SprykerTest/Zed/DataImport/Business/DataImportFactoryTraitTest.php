@@ -69,7 +69,7 @@ class DataImportFactoryTraitTest extends Unit
 
         $this->assertSame($expectedDirectory, $dataImportDirectory);
 
-        $expectedFullFileName = realpath(
+        $expectedFullFileName = $this->stripApplicationRootPath(realpath(
             dirname($reflection->getFileName())
             . DIRECTORY_SEPARATOR . '..'
             . DIRECTORY_SEPARATOR . '..'
@@ -77,7 +77,7 @@ class DataImportFactoryTraitTest extends Unit
             . DIRECTORY_SEPARATOR . '..'
             . DIRECTORY_SEPARATOR . '..'
             . DIRECTORY_SEPARATOR . '..',
-        ) . '/TestModule/data/import/test.csv';
+        ) . '/TestModule/data/import/test.csv');
 
         $this->assertSame($expectedFullFileName, $fullFileName);
         $this->assertSame('some-entity', $dataImporterConfigurationTransfer->getImportType());
@@ -106,7 +106,7 @@ class DataImportFactoryTraitTest extends Unit
 
         $fullFileName = $readerConfiguration->getFileName();
 
-        $expectedFullFileName = realpath(
+        $expectedFullFileName = $this->stripApplicationRootPath(realpath(
             dirname($reflection->getFileName())
             . DIRECTORY_SEPARATOR . '..'
             . DIRECTORY_SEPARATOR . '..'
@@ -114,7 +114,7 @@ class DataImportFactoryTraitTest extends Unit
             . DIRECTORY_SEPARATOR . '..'
             . DIRECTORY_SEPARATOR . '..'
             . DIRECTORY_SEPARATOR . '..',
-        ) . '/ProductLabelDataImport/data/import/product_label.csv';
+        ) . '/ProductLabelDataImport/data/import/product_label.csv');
 
         $this->assertSame($expectedFullFileName, $fullFileName);
         $this->assertSame('product-label', $dataImporterConfigurationTransfer->getImportType());
@@ -134,6 +134,13 @@ class DataImportFactoryTraitTest extends Unit
         // Assert
         $this->assertInstanceOf(DataImporter::class, $dataImporter);
         $this->assertSame('product-label', $dataImporter->getImportType());
+    }
+
+    protected function stripApplicationRootPath(string $path): string
+    {
+        $applicationRootPath = rtrim(APPLICATION_ROOT_DIR, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+
+        return substr($path, strlen($applicationRootPath));
     }
 
     /**

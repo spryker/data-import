@@ -92,7 +92,7 @@ trait DataImportFactoryTrait
         $fullFileName = $this->getModuleDataImportDirectory($dataImporterDataSourceConfigurationTransfer->getModuleName()) . $dataImporterDataSourceConfigurationTransfer->getFileNameOrFail();
 
         $dataImportReaderConfigurationTransfer
-            ->setFileName($fullFileName)
+            ->setFileName($this->getApplicationRootRelativePath($fullFileName))
             ->addDirectory($dataImportDirectory);
 
         $dataImporterConfigurationTransfer = new DataImporterConfigurationTransfer();
@@ -128,6 +128,24 @@ trait DataImportFactoryTrait
         $moduleRoot = $moduleRoot . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR;
 
         return $moduleRoot . 'data' . DIRECTORY_SEPARATOR . 'import' . DIRECTORY_SEPARATOR;
+    }
+
+    /**
+     * @internal
+     *
+     * @see \Spryker\Zed\DataImport\DataImportConfig::getApplicationRootRelativePath()
+     *
+     * @return string
+     */
+    private function getApplicationRootRelativePath(string $path): string
+    {
+        $applicationRootPath = rtrim(APPLICATION_ROOT_DIR, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+
+        if (!str_starts_with($path, $applicationRootPath)) {
+            return $path;
+        }
+
+        return substr($path, strlen($applicationRootPath));
     }
 
     /**

@@ -86,6 +86,41 @@ class DataImportConfig extends AbstractBundleConfig
     }
 
     /**
+     * Specification:
+     * - Returns the absolute path of the application root directory.
+     * - Used to translate absolute data import source paths into paths relative to the file system they are read from.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getApplicationRootPath(): string
+    {
+        return rtrim(APPLICATION_ROOT_DIR, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+    }
+
+    /**
+     * Specification:
+     * - Returns the given path relative to the application root when it points inside it, unchanged otherwise.
+     * - Data import sources are read through a file system that resolves every path against its own root, which an
+     *   absolute path of the local file system can never match.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getApplicationRootRelativePath(string $path): string
+    {
+        $applicationRootPath = $this->getApplicationRootPath();
+
+        if (strpos($path, $applicationRootPath) !== 0) {
+            return $path;
+        }
+
+        return substr($path, strlen($applicationRootPath));
+    }
+
+    /**
      * @api
      *
      * @return int
@@ -216,7 +251,7 @@ class DataImportConfig extends AbstractBundleConfig
     {
         $dataImportReaderConfigurationTransfer = new DataImporterReaderConfigurationTransfer();
         $dataImportReaderConfigurationTransfer
-            ->setFileName($file)
+            ->setFileName($this->getApplicationRootRelativePath($file))
             ->addDirectory($this->getDataImportRootPath());
 
         $dataImporterConfigurationTransfer = new DataImporterConfigurationTransfer();
